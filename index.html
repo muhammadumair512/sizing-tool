@@ -3597,1168 +3597,13 @@
   });
 
   // -------------------- Globals --------------------
-  let sizingData = {
-    "tops": {
-      "youth-unisex": [
-        {
-          "label": "YXS",
-          "full": "Youth Extra Small",
-          "chest": [
-            66,
-            70
-          ],
-          "height": [
-            105,
-            115
-          ]
-        },
-        {
-          "label": "YS",
-          "full": "Youth Small",
-          "chest": [
-            71,
-            75
-          ],
-          "height": [
-            110,
-            120
-          ]
-        },
-        {
-          "label": "YM",
-          "full": "Youth Medium",
-          "chest": [
-            76,
-            80
-          ],
-          "height": [
-            123,
-            131
-          ]
-        },
-        {
-          "label": "YL",
-          "full": "Youth Large",
-          "chest": [
-            81,
-            85
-          ],
-          "height": [
-            135,
-            145
-          ]
-        },
-        {
-          "label": "YXL",
-          "full": "Youth Extra Large",
-          "chest": [
-            86,
-            90
-          ],
-          "height": [
-            147,
-            157
-          ]
-        }
-      ],
-      "men": [
-        {
-          "label": "XS",
-          "full": "Extra Small",
-          "chest": [
-            91,
-            98
-          ],
-          "height": [
-            160,
-            168
-          ]
-        },
-        {
-          "label": "S",
-          "full": "Small",
-          "chest": [
-            99,
-            104
-          ],
-          "height": [
-            168,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "chest": [
-            105,
-            108
-          ],
-          "height": [
-            175,
-            183
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "chest": [
-            109,
-            112
-          ],
-          "height": [
-            180,
-            188
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "chest": [
-            113,
-            116
-          ],
-          "height": [
-            185,
-            193
-          ]
-        },
-        {
-          "label": "2XL",
-          "full": "Double Extra Large",
-          "chest": [
-            117,
-            120
-          ],
-          "height": [
-            160,
-            190
-          ]
-        },
-        {
-          "label": "3XL",
-          "full": "Triple Extra Large",
-          "chest": [
-            121,
-            124
-          ],
-          "height": [
-            160,
-            190
-          ]
-        },
-        {
-          "label": "4XL",
-          "full": "Quadruple Extra Large",
-          "chest": [
-            125,
-            128
-          ],
-          "height": [
-            160,
-            190
-          ]
-        }
-      ],
-      "women": [
-        {
-          "label": "S",
-          "full": "Small",
-          "chest": [
-            91,
-            94
-          ],
-          "height": [
-            160,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "chest": [
-            95,
-            98
-          ],
-          "height": [
-            165,
-            180
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "chest": [
-            99,
-            102
-          ],
-          "height": [
-            168,
-            185
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "chest": [
-            103,
-            106
-          ],
-          "height": [
-            170,
-            188
-          ]
-        },
-        {
-          "label": "XXL",
-          "full": "Double Extra Large",
-          "chest": [
-            107,
-            110
-          ],
-          "height": [
-            172,
-            193
-          ]
-        },
-        {
-          "label": "XXXL",
-          "full": "Triple Extra Large",
-          "chest": [
-            111,
-            114
-          ],
-          "height": [
-            175,
-            198
-          ]
-        },
-        {
-          "label": "4XL",
-          "full": "Quadruple Extra Large",
-          "chest": [
-            115,
-            118
-          ],
-          "height": [
-            160,
-            190
-          ]
-        },
-        {
-          "label": "5XL",
-          "full": "Quintuple Extra Large",
-          "chest": [
-            119,
-            122
-          ],
-          "height": [
-            160,
-            190
-          ]
-        }
-      ]
-    },
-    "bottoms": {
-      "elastic-shorts": [
-        {
-          "label": "YS",
-          "full": "Youth Small",
-          "waist": [
-            71,
-            76
-          ],
-          "height": [
-            111,
-            119
-          ]
-        },
-        {
-          "label": "YM",
-          "full": "Youth Medium",
-          "waist": [
-            77,
-            82
-          ],
-          "height": [
-            123,
-            131
-          ]
-        },
-        {
-          "label": "YL",
-          "full": "Youth Large",
-          "waist": [
-            83,
-            88
-          ],
-          "height": [
-            135,
-            145
-          ]
-        },
-        {
-          "label": "YXL",
-          "full": "Youth Extra Large",
-          "waist": [
-            89,
-            94
-          ],
-          "height": [
-            147,
-            157
-          ]
-        },
-        {
-          "label": "XS",
-          "full": "Extra Small",
-          "waist": [
-            95,
-            100
-          ],
-          "height": [
-            160,
-            168
-          ]
-        },
-        {
-          "label": "S",
-          "full": "Small",
-          "waist": [
-            101,
-            108
-          ],
-          "height": [
-            168,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "waist": [
-            109,
-            114
-          ],
-          "height": [
-            175,
-            183
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "waist": [
-            115,
-            120
-          ],
-          "height": [
-            180,
-            188
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "waist": [
-            121,
-            124
-          ],
-          "height": [
-            185,
-            193
-          ]
-        },
-        {
-          "label": "XXL",
-          "full": "Double Extra Large",
-          "waist": [
-            125,
-            128
-          ],
-          "height": [
-            188,
-            198
-          ]
-        },
-        {
-          "label": "XXXL",
-          "full": "Triple Extra Large",
-          "waist": [
-            129,
-            132
-          ],
-          "height": [
-            190,
-            203
-          ]
-        }
-      ],
-      "tracksuit-pants": [
-        {
-          "label": "YXS",
-          "full": "Youth Extra Small",
-          "waist": [
-            65,
-            70
-          ],
-          "height": [
-            99,
-            107
-          ]
-        },
-        {
-          "label": "YS",
-          "full": "Youth Small",
-          "waist": [
-            71,
-            76
-          ],
-          "height": [
-            111,
-            119
-          ]
-        },
-        {
-          "label": "YM",
-          "full": "Youth Medium",
-          "waist": [
-            77,
-            82
-          ],
-          "height": [
-            123,
-            131
-          ]
-        },
-        {
-          "label": "YL",
-          "full": "Youth Large",
-          "waist": [
-            83,
-            88
-          ],
-          "height": [
-            135,
-            145
-          ]
-        },
-        {
-          "label": "YXL",
-          "full": "Youth Extra Large",
-          "waist": [
-            89,
-            94
-          ],
-          "height": [
-            147,
-            157
-          ]
-        },
-        {
-          "label": "XS",
-          "full": "Extra Small",
-          "waist": [
-            95,
-            100
-          ],
-          "height": [
-            160,
-            168
-          ]
-        },
-        {
-          "label": "S",
-          "full": "Small",
-          "waist": [
-            101,
-            108
-          ],
-          "height": [
-            168,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "waist": [
-            109,
-            114
-          ],
-          "height": [
-            175,
-            183
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "waist": [
-            115,
-            120
-          ],
-          "height": [
-            180,
-            188
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "waist": [
-            121,
-            124
-          ],
-          "height": [
-            185,
-            193
-          ]
-        },
-        {
-          "label": "XXL",
-          "full": "Double Extra Large",
-          "waist": [
-            125,
-            128
-          ],
-          "height": [
-            188,
-            198
-          ]
-        },
-        {
-          "label": "XXXL",
-          "full": "Triple Extra Large",
-          "waist": [
-            129,
-            132
-          ],
-          "height": [
-            190,
-            203
-          ]
-        }
-      ],
-      "baseball-pants": [
-        {
-          "label": "YXS",
-          "full": "Youth Extra Small",
-          "waist": [
-            65,
-            70
-          ],
-          "height": [
-            99,
-            107
-          ]
-        },
-        {
-          "label": "YS",
-          "full": "Youth Small",
-          "waist": [
-            71,
-            76
-          ],
-          "height": [
-            111,
-            119
-          ]
-        },
-        {
-          "label": "YM",
-          "full": "Youth Medium",
-          "waist": [
-            77,
-            82
-          ],
-          "height": [
-            123,
-            131
-          ]
-        },
-        {
-          "label": "YL",
-          "full": "Youth Large",
-          "waist": [
-            83,
-            88
-          ],
-          "height": [
-            135,
-            145
-          ]
-        },
-        {
-          "label": "YXL",
-          "full": "Youth Extra Large",
-          "waist": [
-            89,
-            94
-          ],
-          "height": [
-            147,
-            157
-          ]
-        },
-        {
-          "label": "XS",
-          "full": "Extra Small",
-          "waist": [
-            95,
-            100
-          ],
-          "height": [
-            160,
-            168
-          ]
-        },
-        {
-          "label": "S",
-          "full": "Small",
-          "waist": [
-            101,
-            108
-          ],
-          "height": [
-            168,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "waist": [
-            109,
-            114
-          ],
-          "height": [
-            175,
-            183
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "waist": [
-            115,
-            120
-          ],
-          "height": [
-            180,
-            188
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "waist": [
-            121,
-            124
-          ],
-          "height": [
-            185,
-            193
-          ]
-        },
-        {
-          "label": "XXL",
-          "full": "Double Extra Large",
-          "waist": [
-            125,
-            128
-          ],
-          "height": [
-            188,
-            198
-          ]
-        },
-        {
-          "label": "XXXL",
-          "full": "Triple Extra Large",
-          "waist": [
-            129,
-            132
-          ],
-          "height": [
-            190,
-            203
-          ]
-        }
-      ]
-    },
-    "jackets": {
-      "youth-unisex": [
-        {
-          "label": "YXS",
-          "full": "Youth Extra Small",
-          "chest": [
-            71,
-            76
-          ],
-          "height": [
-            99,
-            107
-          ]
-        },
-        {
-          "label": "YS",
-          "full": "Youth Small",
-          "chest": [
-            77,
-            82
-          ],
-          "height": [
-            111,
-            119
-          ]
-        },
-        {
-          "label": "YM",
-          "full": "Youth Medium",
-          "chest": [
-            83,
-            88
-          ],
-          "height": [
-            123,
-            131
-          ]
-        },
-        {
-          "label": "YL",
-          "full": "Youth Large",
-          "chest": [
-            89,
-            94
-          ],
-          "height": [
-            135,
-            145
-          ]
-        },
-        {
-          "label": "YXL",
-          "full": "Youth Extra Large",
-          "chest": [
-            95,
-            100
-          ],
-          "height": [
-            147,
-            157
-          ]
-        }
-      ],
-      "men": [
-        {
-          "label": "XS",
-          "full": "Extra Small",
-          "chest": [
-            101,
-            106
-          ],
-          "height": [
-            160,
-            168
-          ]
-        },
-        {
-          "label": "S",
-          "full": "Small",
-          "chest": [
-            107,
-            110
-          ],
-          "height": [
-            168,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "chest": [
-            111,
-            114
-          ],
-          "height": [
-            175,
-            183
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "chest": [
-            115,
-            118
-          ],
-          "height": [
-            180,
-            188
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "chest": [
-            119,
-            122
-          ],
-          "height": [
-            185,
-            193
-          ]
-        },
-        {
-          "label": "XXL",
-          "full": "Double Extra Large",
-          "chest": [
-            123,
-            126
-          ],
-          "height": [
-            188,
-            198
-          ]
-        },
-        {
-          "label": "XXXL",
-          "full": "Triple Extra Large",
-          "chest": [
-            127,
-            130
-          ],
-          "height": [
-            190,
-            203
-          ]
-        }
-      ],
-      "women": [
-        {
-          "label": "S",
-          "full": "Small",
-          "chest": [
-            107,
-            110
-          ],
-          "height": [
-            160,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "chest": [
-            111,
-            114
-          ],
-          "height": [
-            165,
-            180
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "chest": [
-            115,
-            118
-          ],
-          "height": [
-            168,
-            185
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "chest": [
-            119,
-            122
-          ],
-          "height": [
-            170,
-            188
-          ]
-        },
-        {
-          "label": "XXL",
-          "full": "Double Extra Large",
-          "chest": [
-            123,
-            126
-          ],
-          "height": [
-            172,
-            193
-          ]
-        },
-        {
-          "label": "XXXL",
-          "full": "Triple Extra Large",
-          "chest": [
-            127,
-            130
-          ],
-          "height": [
-            175,
-            198
-          ]
-        }
-      ]
-    },
-    "hoodies": {
-      "youth-unisex": [
-        {
-          "label": "YXS",
-          "full": "Youth Extra Small",
-          "chest": [
-            66,
-            70
-          ],
-          "height": [
-            99,
-            107
-          ]
-        },
-        {
-          "label": "YS",
-          "full": "Youth Small",
-          "chest": [
-            71,
-            76
-          ],
-          "height": [
-            111,
-            119
-          ]
-        },
-        {
-          "label": "YM",
-          "full": "Youth Medium",
-          "chest": [
-            77,
-            82
-          ],
-          "height": [
-            123,
-            131
-          ]
-        },
-        {
-          "label": "YL",
-          "full": "Youth Large",
-          "chest": [
-            83,
-            88
-          ],
-          "height": [
-            135,
-            145
-          ]
-        },
-        {
-          "label": "YXL",
-          "full": "Youth Extra Large",
-          "chest": [
-            89,
-            94
-          ],
-          "height": [
-            147,
-            157
-          ]
-        }
-      ],
-      "men": [
-        {
-          "label": "XS",
-          "full": "Extra Small",
-          "chest": [
-            95,
-            100
-          ],
-          "height": [
-            160,
-            168
-          ]
-        },
-        {
-          "label": "S",
-          "full": "Small",
-          "chest": [
-            101,
-            104
-          ],
-          "height": [
-            168,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "chest": [
-            105,
-            108
-          ],
-          "height": [
-            175,
-            183
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "chest": [
-            109,
-            112
-          ],
-          "height": [
-            180,
-            188
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "chest": [
-            113,
-            116
-          ],
-          "height": [
-            185,
-            193
-          ]
-        },
-        {
-          "label": "2XL",
-          "full": "Double Extra Large",
-          "chest": [
-            117,
-            120
-          ],
-          "height": [
-            160,
-            190
-          ]
-        },
-        {
-          "label": "3XL",
-          "full": "Triple Extra Large",
-          "chest": [
-            121,
-            124
-          ],
-          "height": [
-            160,
-            190
-          ]
-        },
-        {
-          "label": "4XL",
-          "full": "Quadruple Extra Large",
-          "chest": [
-            125,
-            128
-          ],
-          "height": [
-            160,
-            190
-          ]
-        }
-      ],
-      "women": [
-        {
-          "label": "S",
-          "full": "Small",
-          "chest": [
-            101,
-            104
-          ],
-          "height": [
-            160,
-            175
-          ]
-        },
-        {
-          "label": "M",
-          "full": "Medium",
-          "chest": [
-            105,
-            108
-          ],
-          "height": [
-            165,
-            180
-          ]
-        },
-        {
-          "label": "L",
-          "full": "Large",
-          "chest": [
-            109,
-            112
-          ],
-          "height": [
-            168,
-            185
-          ]
-        },
-        {
-          "label": "XL",
-          "full": "Extra Large",
-          "chest": [
-            113,
-            116
-          ],
-          "height": [
-            170,
-            188
-          ]
-        },
-        {
-          "label": "XXL",
-          "full": "Double Extra Large",
-          "chest": [
-            117,
-            120
-          ],
-          "height": [
-            172,
-            193
-          ]
-        },
-        {
-          "label": "XXXL",
-          "full": "Triple Extra Large",
-          "chest": [
-            121,
-            124
-          ],
-          "height": [
-            175,
-            198
-          ]
-        },
-        {
-          "label": "4XL",
-          "full": "Quadruple Extra Large",
-          "chest": [
-            125,
-            128
-          ],
-          "height": [
-            160,
-            190
-          ]
-        }
-      ]
-    }
-  };
+  let sizingData = {};
+  fetch("./data.json")
+    .then((res) => res.json())
+    .then((data) => {
+      sizingData = data;
+    })
+    .catch((err) => console.error("Error loading sizing data:", err));
 
   // -------------------- Fetch JSON Data --------------------
   // fetch("/data.json")
@@ -4954,16 +3799,19 @@
           measurementUnit
         );
     
-        const topInputs = [
+        const rawTopInputs = [
           ...document.querySelectorAll(
             'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
           ),
         ];
-        const bottomInputs = [
+        const topInputs = Array.from(new Map(rawTopInputs.map(item => [item.value, item])).values());
+
+        const rawBottomInputs = [
           ...document.querySelectorAll(
             'input[name="shorts"]:checked, input[name="pants"]:checked'
           ),
         ];
+        const bottomInputs = Array.from(new Map(rawBottomInputs.map(item => [item.value, item])).values());
     
         containerTop.innerHTML = "";
         containerBottom.innerHTML = "";
@@ -4972,11 +3820,11 @@
         topInputs.forEach((el) => {
           const selected = el.value;
     
-          let categoryData = selected.includes("jacket")
-            ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
-            : selected.includes("hoodie")
-            ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
-            : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
+          let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
     
           const bestSize = findClosestSize(
             categoryData,
@@ -5031,20 +3879,18 @@
           selected.replace(/-/g, " ") === "jacket"
             ? "hoodie"
             : "top"
-        }
-    .webp" class="recom-img" alt="" />
+        }.webp" class="recom-img" alt="" />
       `;
           containerTop.appendChild(div);
         });
     
         bottomInputs.forEach((el) => {
           const selected = el.value;
-          const categoryKey = selected.includes("shorts")
-            ? "elastic-shorts"
-            : selected.includes("baseball")
-            ? "baseball-pants"
-            : "tracksuit-pants";
-          const categoryData = sizingData.bottoms[categoryKey];
+          let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
     
           // Use 'leg' for pants, 'height' (dummy) for shorts
           const isPants = selected.includes("pants");
@@ -5413,11 +4259,11 @@ TO PROCESSING BUTTON CLICK
             ];
             topInputs.forEach((el) => {
               const selected = el.value;
-              let categoryData = selected.includes("jacket")
-                ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
-                : selected.includes("hoodie")
-                  ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
-                  : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
+              let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
 
               const bestSize = findClosestSize(
                 categoryData,
@@ -5437,13 +4283,11 @@ TO PROCESSING BUTTON CLICK
             ];
             bottomInputs.forEach((el) => {
               const selected = el.value;
-              const categoryKey = selected.includes("shorts")
-                ? "elastic-shorts"
-                : selected.includes("baseball")
-                  ? "baseball-pants"
-                  : "tracksuit-pants";
-
-              const categoryData = sizingData.bottoms[categoryKey];
+              let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
               const bestSize = findClosestSize(
                 categoryData,
                 waist,
@@ -5589,11 +4433,11 @@ TO PROCESSING BUTTON CLICK
             // === TOPS ===
             topInputs.forEach((el) => {
               const selected = el.value;
-              let categoryData = selected.includes("jacket")
-                ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
-                : selected.includes("hoodie")
-                  ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
-                  : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
+              let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
 
               const bestSize = findClosestSize(
                 categoryData,
@@ -5617,13 +4461,11 @@ TO PROCESSING BUTTON CLICK
             // === BOTTOMS ===
             bottomInputs.forEach((el) => {
               const selected = el.value;
-              const categoryKey = selected.includes("shorts")
-                ? "elastic-shorts"
-                : selected.includes("baseball")
-                  ? "baseball-pants"
-                  : "tracksuit-pants";
-
-              const categoryData = sizingData.bottoms[categoryKey];
+              let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
               const bestSize = findClosestSize(
                 categoryData,
                 waist,
@@ -5984,14 +4826,17 @@ TO PROCESSING BUTTON CLICK
     playerName.innerText = row.playerName;
     clubName.innerText = row.club;
     // Select all top and bottom options from your HTML
-    const topInputs = [
+    const rawTopInputs = [
       ...document.querySelectorAll(
         'input[name="short-sleeved"], input[name="long-sleeved"], input[name="hoodies"]'
       ),
     ];
-    const bottomInputs = [
+    const topInputs = Array.from(new Map(rawTopInputs.map(item => [item.value, item])).values());
+
+    const rawBottomInputs = [
       ...document.querySelectorAll('input[name="shorts"], input[name="pants"]'),
     ];
+    const bottomInputs = Array.from(new Map(rawBottomInputs.map(item => [item.value, item])).values());
 
     // Clear previous results
     containerTopBulk.innerHTML = "";
@@ -6002,11 +4847,11 @@ TO PROCESSING BUTTON CLICK
       const selected = el.value;
 
       // Determine category data
-      let categoryData = selected.includes("jacket")
-        ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
-        : selected.includes("hoodie")
-          ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
-          : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
+      let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
 
       const bestSize = findClosestSize(
         categoryData,
@@ -6067,13 +4912,11 @@ TO PROCESSING BUTTON CLICK
     bottomInputs.forEach((el) => {
       const selected = el.value;
 
-      const categoryKey = selected.includes("shorts")
-        ? "elastic-shorts"
-        : selected.includes("baseball")
-          ? "baseball-pants"
-          : "tracksuit-pants";
-
-      const categoryData = sizingData.bottoms[categoryKey];
+      let productData = sizingData[selected] || {};
+      let categoryData = [
+        ...(productData["youth-unisex"] || []),
+        ...(productData[genderInput] || [])
+      ];
       const bestSize = findClosestSize(
         categoryData,
         waist,
