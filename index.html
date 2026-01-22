@@ -2426,10 +2426,10 @@
         <p class="para measurement-para">Enter your body measurements</p>
         <div class="mesurement-section">
           <div class="radio-group measurement-group">
-            <label class="radio-card">
+            <!-- <label class="radio-card">
               <input type="radio" name="measurement" value="inches" selected />
               <div class="card-content measurement-content">Inches</div>
-            </label>
+            </label> -->
 
             <label class="radio-card">
               <input type="radio" name="measurement" value="cm" checked />
@@ -2446,8 +2446,8 @@
               <input type="number" placeholder="e.g., 82" id="waist" />
             </div>
             <div class="input-holder">
-              <label>Height</label>
-              <input type="number" placeholder="e.g., 177" id="height" />
+              <label>Torso Length</label>
+              <input type="number" placeholder="e.g., 70" id="height" />
             </div>
           </div>
           <div class="section help-block">
@@ -3178,16 +3178,16 @@
   );
 
   function updatePlaceholders(unit) {
-    const isCM = unit === "cm";
+    // const isCM = unit === "cm";
 
-    chestInput.placeholder = isCM ? "e.g., 92" : "e.g., 36";
-    waistInput.placeholder = isCM ? "e.g., 82" : "e.g., 32";
-    heightInput.placeholder = isCM ? "e.g., 177" : "e.g., 70";
+    // chestInput.placeholder = isCM ? "e.g., 92" : "e.g., 36";
+    // waistInput.placeholder = isCM ? "e.g., 82" : "e.g., 32";
+    // heightInput.placeholder = isCM ? "e.g., 177" : "e.g., 70";
   }
 
   measurementRadios.forEach((radio) => {
     radio.addEventListener("change", (e) => {
-      updatePlaceholders(e.target.value);
+      // updatePlaceholders(e.target.value);
     });
   });
 
@@ -4763,7 +4763,7 @@
 
   // Convert inches to cm if needed
   function convertToCM(value, unit) {
-    if (unit === "inches") return Math.round(value * 2.54);
+    // if (unit === "inches") return Math.round(value * 2.54);
     return value;
   }
 
@@ -4782,9 +4782,9 @@
     typeKeyPrimary,
     typeKeySecondary
   ) {
-    const unit =
-      document.querySelector('input[name="measurementTeam"]:checked')?.value ||
-      "cm";
+    const unit = "cm";
+      // document.querySelector('input[name="measurementTeam"]:checked')?.value ||
+      // "cm";
 
     const toCm = (val) => (unit === "inches" ? val * 2.54 : val);
 
@@ -4924,9 +4924,9 @@
 
     const genderInput =
       document.querySelector('input[name="cut"]:checked')?.value || "male";
-    const measurementUnit =
-      document.querySelector('input[name="measurement"]:checked')?.value ||
-      "cm";
+    const measurementUnit = "cm";
+      // document.querySelector('input[name="measurement"]:checked')?.value ||
+      // "cm";
 
     const chest = convertToCM(
       parseFloat(document.getElementById("chest").value),
@@ -5959,9 +5959,9 @@ TO PROCESSING BUTTON CLICK
     if (!sizingData) return;
 
     const genderInput = row.cut?.toLowerCase() || "male";
-    const measurementUnit =
-      document.querySelector('input[name="measurementTeam"]:checked')?.value ||
-      "cm";
+    const measurementUnit = "cm";
+      // document.querySelector('input[name="measurementTeam"]:checked')?.value ||
+      // "cm";
 
     // Convert all required measurements
     const chest = convertToCM(parseFloat(row.chest), measurementUnit);
