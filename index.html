@@ -1,0 +1,6197 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+  :root {
+    --body-background: #000000;
+    --background-card: rgba(17, 82, 245, 0.08);
+    --accent-secondary: #ffffff1a;
+    --primary-font: white;
+    --secondary-font: #99a0af;
+    --accent-color: #ff6900;
+    --hover-color: #1e6bff;
+    --dropdown-background: #ffffff0a;
+    --borders-color: #8080808c;
+    --font-family: Inter;
+    --font-green: #00bc7d;
+    --font-blue: #3c68a8;
+    --font-yellow: #ffa600;
+    --font-red: #ff1b26;
+    --border-secondary: #f9fafb;
+  }
+
+  body {
+    background: var(--body-background) !important;
+    font-family: var(--font-family);
+    color: var(--primary-font);
+  }
+
+  .e-con>.e-con-inner:has(.sizing-tool) {
+    max-width: none;
+  }
+
+  .holder {
+    color: var(--primary-font);
+    max-width: 1088px;
+    margin: auto;
+    width: 100%;
+    border-radius: 16px;
+    padding: 32px;
+    gap: 32px;
+    opacity: 1;
+    box-shadow: 0px 1px 94.1px -1px #0000001a;
+
+    box-shadow: 0px 4px 4px 0px #00000040;
+    background: var(--background-card);
+  }
+
+  .heading {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 100%;
+    letter-spacing: 0.07px;
+    margin: 0;
+    color: var(--primary-font);
+  }
+
+  .para {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: var(--secondary-font);
+    margin-top: 4px;
+    margin-bottom: 32px;
+  }
+
+  .heading-small {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .para-small {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .box .dropdown {
+    border-radius: 10px;
+    padding: 17px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s;
+    flex: 1;
+  }
+
+  .dropdown p,
+  .border p,
+  .dropdown span {
+    font-family: var(--font-family);
+  }
+
+  .box .border {
+    border: 1px solid transparent;
+  }
+
+  .dropdown {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .dropdown input {
+    display: none;
+  }
+
+  /* Selected state */
+  .dropdown:has(input:checked) {
+    background: var(--hover-color);
+    border-color: var(--hover-color);
+    color: #fff;
+  }
+
+  /* Optional: ensure text turns var(--primary-font) */
+  .dropdown:has(input:checked) .box {
+    color: #fff;
+  }
+
+  .box .border:hover {
+    transition: all 0.3s;
+    border-color: var(--borders-color);
+    background: transparent;
+  }
+
+  .box .border:hover,
+  .box .dropdown:hover {
+    cursor: pointer;
+    background: var(--body-background);
+  }
+
+  .box div p {
+    margin: 0;
+  }
+
+  .box-holder {
+    display: flex;
+    gap: 12px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /*Radio Styling*/
+
+  .radio-group {
+    flex-wrap: wrap;
+    margin-top: 12px;
+    font-family: var(--font-family);
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.8s ease, opacity 0.8s ease, margin-top 0.8s ease;
+    display: flex;
+    gap: 8px;
+  }
+
+  .border .radio-group {
+    margin: 0;
+  }
+
+  .radio-group.show {
+    max-height: 500px;
+    /* adjust based on content */
+    opacity: 1;
+    margin-top: 12px;
+  }
+
+  .flex img {
+    transition: transform 0.3s ease;
+  }
+
+  .flex img.rotated {
+    transform: rotate(180deg);
+  }
+
+  .radio-card input {
+    display: none;
+  }
+
+  .radio-card .card-content {
+    padding: 9px 17px;
+    border: 2px solid var(--accent-secondary);
+    border-radius: 33554400px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+  }
+
+  .radio-card .card-content:hover {
+    border-color: var(--hover-color);
+  }
+
+  .radio-card input:checked+.card-content {
+    background: var(--hover-color);
+    color: var(--primary-font);
+  }
+
+  .border {
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: var(--dropdown-background);
+  }
+
+  .section {
+    margin-bottom: 32px;
+  }
+
+  .section .dropdown {
+    padding: 0;
+  }
+
+  .cut-group,
+  .measurement-group {
+    display: flex;
+    opacity: 1;
+    max-height: none;
+  }
+
+  .radio-card .cut-content {
+    width: 194.671875px;
+    height: 50px;
+    border-radius: 10px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .radio-card input:checked+.cut-content {
+    background: #137fec0d;
+    border: 2px solid var(--hover-color);
+  }
+
+  .measurement-para {
+    margin-top: 0px;
+    margin-bottom: 12px;
+  }
+
+  .measurement-group {
+    display: flex;
+    background: var(--accent-secondary);
+    width: fit-content;
+    border-radius: 10px;
+    padding: 4px;
+    margin: 12px 0 12px;
+  }
+
+  .radio-card .measurement-content {
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+
+  .radio-card input:checked+.measurement-content {
+    border-width: 1px;
+    box-shadow: 0px 1px 2px -1px #0000001a;
+    border: 1px solid var(--border-secondary);
+    box-shadow: 0px 1px 3px 0px #0000001a;
+    background: var(--accent-secondary);
+  }
+
+  .flex-start {
+    align-items: flex-start;
+  }
+
+  .input-holder {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-family);
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .input-holder input {
+    height: 50px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border: 1px solid var(--border-secondary);
+    background: none;
+    color: var(--primary-font);
+    outline: none;
+    transition: all 0.3s;
+  }
+
+  .input-holder input:focus {
+    background: var(--accent-secondary);
+    border-color: var(--hover-color);
+  }
+
+  .input-block {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .input-holder-5 {
+    grid-column: span 2;
+  }
+
+  .help-block {
+    font-family: var(--font-family);
+    background: var(--dropdown-background);
+    border-radius: 10px;
+    padding: 12px 17px;
+    margin-bottom: 32px;
+    margin-top: 12px;
+  }
+
+  .help-initial {
+    display: flex;
+    gap: 6px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: -0.15px;
+    color: var(--accent-color);
+  }
+
+  .help-block p {
+    margin: 0;
+  }
+
+  .help-block .lower-line {
+    margin-left: 27px;
+    color: var(--primary-font);
+  }
+
+  .lower-line a,
+  .documentation {
+    color: var(--accent-color);
+    transition: all 0.3s;
+  }
+
+  .lower-line a:hover,
+  .documentation:hover {
+    color: #bfff0097;
+  }
+
+  .documentation {
+    margin-left: auto;
+  }
+
+  .btn-holder {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    height: 50px;
+    border-radius: 10px;
+    border-width: 1px;
+    padding: 0 25px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: var(--font-family);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: black;
+    background: white;
+    border-color: black;
+  }
+
+  .btn-primary {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    background: transparent;
+  }
+
+  .btn-secondary {
+    border-color: var(--hover-color);
+    color: var(--primary-font);
+    background: var(--hover-color);
+  }
+
+  .btn-tertiary {
+    border-color: var(--primary-font);
+    color: var(--primary-font);
+    background: transparent;
+  }
+
+  .btn:hover {
+    background: var(--accent-color);
+  }
+
+  .btn-tertiary:hover {
+    background: var(--primary-font);
+    color: var(--body-background);
+  }
+
+  .btn-tertiary:focus {
+    background: var(--primary-font);
+    color: var(--body-background);
+  }
+
+  .btn-primary:hover {
+    background: var(--primary-font);
+    color: var(--accent-color);
+  }
+
+  .btn-secondary:hover,
+  .btn-secondary:focus {
+    background: #072f91;
+    color: var(--border-secondary);
+  }
+
+  .btn-disabled:hover,
+  .btn-disabled:focus {
+    background: var(--accent-secondary);
+    cursor: not-allowed;
+  }
+
+  .btn-special {
+    background: #5f6c8a4d;
+    color: var(--primary-font);
+    border: none;
+  }
+
+  .icons-holder {
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    font-family: var(--font-family);
+    border-top: 1px solid var(--secondary-font);
+    margin: 0;
+  }
+
+  .icons-holder p {
+    margin: 0;
+
+    color: var(--secondary-font);
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .icon {
+    margin-top: 25px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Tabs wrapper */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid rgba(249, 250, 251, 0.1);
+    margin-bottom: 32px;
+  }
+
+  /* Hide radio buttons */
+  .tabs input[type="radio"] {
+    display: none;
+  }
+
+  /* Tab labels */
+  .tabs label {
+    padding: 0 16px 14px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    font-family: var(--font-family);
+    font-size: 16px;
+    color: var(--secondary-font);
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  /* Hover state (no border, just color) */
+  .tabs label:hover {
+    color: #ffffff;
+    border-bottom-color: var(--hover-color);
+  }
+
+  /* Active tab */
+  .tabs input[type="radio"]:checked+label {
+    color: #ffffff;
+    border-bottom-color: var(--hover-color);
+  }
+
+  /* Smooth content transition */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /*Status Styles*/
+
+  .dot {
+    background: var(--accent-color);
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+  }
+
+  .status-holder {
+    background: var(--accent-secondary);
+    padding: 4px 20px;
+    box-shadow: 0px 1px 2px -1px #0000001a;
+
+    box-shadow: 0px 1px 3px 0px #0000001a;
+    border-radius: 33554400px;
+
+    margin: 0 auto 32px;
+    width: fit-content;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .status-left {
+    padding-left: 5px;
+  }
+
+  .status-right {
+    padding-right: 5px;
+  }
+
+  .status {
+    background: #ff69001a;
+    display: flex;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 33554400px;
+    font-family: var(--font-family);
+    align-items: center;
+    width: fit-content;
+  }
+
+  .status img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .status p {
+    margin: 0;
+    color: var(--accent-color);
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  .heading-star::after {
+    content: " *";
+    color: var(--accent-color);
+    margin-left: 4px;
+  }
+
+  .heading-team {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-family: var(--font-family);
+    letter-spacing: -0.44px;
+    gap: 12px;
+    margin: 0 0 12px;
+  }
+
+  .heading-team h3 {
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .flex-border {
+    border-top: 1px solid var(--border-secondary);
+    align-items: flex-end;
+    margin-top: 24px;
+  }
+
+  .flex-border .btn {
+    margin-top: 20px;
+  }
+
+  .btn-hold {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 32px;
+  }
+
+  .btn-disabled {
+    background: var(--accent-secondary);
+    color: var(--secondary-font);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    outline: none;
+    border: none;
+    cursor: not-allowed;
+  }
+
+  .btn-disabled::after {
+    content: " →";
+    font-size: 12px;
+  }
+
+  /*Analysing Block Styles*/
+
+  .analzing-block {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--body-background) url(https://xsuniforms.com/wp-content/uploads/2026/01/Main-Content.png) !important;
+  }
+
+  .analzing-block>img {
+    margin-top: 86px;
+  }
+
+  .radar {
+    position: relative;
+    width: 110px;
+    /* size of the radar container */
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .icon-box {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* pulse rings */
+  .pulse-ring {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--hover-color);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+    opacity: 0.6;
+    z-index: 1;
+  }
+
+  /* stagger the rings */
+  .pulse-ring:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .pulse-ring:nth-child(2) {
+    animation-delay: 0.5s;
+  }
+
+  .pulse-ring:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  /* pulse animation */
+  @keyframes pulse {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.6;
+    }
+
+    100% {
+      transform: scale(1.75);
+      opacity: 0;
+    }
+  }
+
+  .heading-analyze {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 48px;
+    letter-spacing: -0.39px;
+    text-align: center;
+    color: var(--primary-font);
+    margin-top: 48px;
+  }
+
+  .para-analyze {
+    max-width: 447px;
+    text-align: center;
+  }
+
+  .processing-card {
+    box-shadow: 0px 1px 2px -1px #0000001a;
+
+    box-shadow: 0px 1px 3px 0px #0000001a;
+    max-width: 560px;
+    width: 100%;
+    padding: 24px;
+    border-radius: 14px;
+    background: var(--dropdown-background);
+  }
+
+  .processing-card h4 {
+    text-transform: uppercase;
+    color: var(--border-secondary);
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+  }
+
+  .percentage-holder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .percentage-holder .analysze {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: var(--secondary-font);
+    margin: 4px 0 0;
+  }
+
+  .percentage {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.07px;
+    color: #137fec;
+    margin: 0;
+  }
+
+  .steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .step {
+    flex: 1;
+    text-align: center;
+  }
+
+  .steps p {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: var(--border-secondary);
+  }
+
+  .percentage-bar-holder {
+    margin: 12px 0 16px;
+    position: relative;
+  }
+
+  .percentage-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--border-secondary);
+    border-radius: 33554400px;
+  }
+
+  .percentage-progress-bar {
+    height: 12px;
+    border-radius: 33554400px;
+    position: absolute;
+    background: #137fec;
+    top: 0;
+  }
+
+  .bar-holder {
+    position: relative;
+  }
+
+  .bar {
+    width: 100%;
+    height: 4px;
+    border-radius: 33554400px;
+    background: var(--body-background);
+  }
+
+  .bar-progress {
+    position: absolute;
+    height: 4px;
+    border-radius: 33554400px;
+    background: #137fec;
+    top: 0;
+  }
+
+  .btn-cancel {
+    background: transparent;
+    color: #e7000b;
+    border-color: #e7000b;
+    transition: all 0.3s;
+    display: flex;
+    gap: 12.5px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  #recalculateIndividual {
+    margin-left: auto;
+  }
+
+  .green {
+    color: #00c950;
+    border-color: #00c950;
+  }
+
+  .green img {
+    height: 8px;
+    width: 13px;
+  }
+
+  .btn-cancel:hover {
+    background: var(--primary-font);
+  }
+
+  /*Individual Results*/
+
+  .heading-recomm {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 48px;
+    letter-spacing: -0.39px;
+    color: var(--primary-font);
+  }
+
+  .para-recomm {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: var(--secondary-font);
+  }
+
+  .individual-recomm {
+    max-width: 1080px;
+    width: 100%;
+    margin: auto;
+  }
+
+  .recom-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 10px 0 32px;
+  }
+
+  .size-box,
+  .size-details {
+    flex: 1;
+  }
+
+  .size-box {
+    background: #1152f51a;
+    border-right: 1px solid var(--accent-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px 0 0 14px;
+  }
+
+  .size-heading {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--secondary-font);
+    margin: 0 0 8px;
+  }
+
+  .size {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 128px;
+    line-height: 128px;
+    letter-spacing: -6.4px;
+    color: var(--primary-font);
+    margin: 0 0 7px;
+  }
+
+  .fits-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .pill {
+    display: flex;
+    border-radius: 33554400px;
+    padding: 5px 14px;
+    border: 1px solid;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .pill img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .pill p {
+    margin: 0;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+  }
+
+  .pill-green {
+    background: #dcfce7;
+    border-color: #b9f8cf;
+    color: #008236;
+  }
+
+  .size-details {
+    padding: 32px 42px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 0 14px 14px 0;
+  }
+
+  .flex-size {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .flex-size img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .flex-size p {
+    margin: 0;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: var(--secondary-font);
+  }
+
+  .flex-size h3 {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: -0.44px;
+    margin: 0;
+    color: var(--border-secondary);
+  }
+
+  .flex-size span {
+    font-weight: 700;
+  }
+
+  .size-details .btn {
+    width: fit-content;
+    margin-left: auto;
+  }
+
+  .stats-holder {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    width: 100%;
+  }
+
+  .stat {
+    flex: 1;
+    border-radius: 14px;
+    border: 1px solid var(--borders-color);
+    background: var(--dropdown-background);
+    padding: 24px;
+  }
+
+  .stat div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .stat img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .stat p {
+    margin: 0;
+  }
+
+  .stat-heading {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    color: var(--secondary-font);
+  }
+
+  .measurement {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.07px;
+    color: var(--border-secondary);
+  }
+
+  .comment {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+  }
+
+  .comment-green {
+    color: #00a63e;
+  }
+
+  .comment-orange {
+    color: #d08700;
+  }
+
+  .stat div:first-child {
+    margin-bottom: 8px;
+  }
+
+  /*CSV Upload area*/
+
+  .uploadBlock {
+    max-width: 1020px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0px 1px 94.1px -1px #0000001a;
+    background: var(--background-card);
+    margin: auto;
+    padding: 32px;
+    display: none;
+  }
+
+  .uploadBlock>.individual-recomm {
+    margin: 24px 0 0;
+    max-width: none;
+  }
+
+  .pill-grey {
+    background: var(--accent-secondary);
+
+    border: 1px solid #dcfce71a;
+    color: var(--primary-font);
+  }
+
+  .pill-grey p {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: var(--secondary-font);
+  }
+
+  .upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px dashed var(--border-secondary);
+    border-radius: 10px;
+    padding: 32px 0;
+    gap: 24px;
+    flex: 3;
+  }
+
+  .uploadRequirements {
+    flex: 2;
+  }
+
+  .upload>img {
+    width: 64px;
+    height: 72px;
+  }
+
+  .upload>div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .uploadBox {
+    display: flex;
+    box-shadow: 0px 1px 2px -1px #0000001a;
+
+    box-shadow: 0px 1px 3px 0px #0000001a;
+    background: var(--dropdown-background);
+    border-radius: 14px;
+    padding: 12px;
+    gap: 11px;
+  }
+
+  .uploadDetail h3 {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.89px;
+    color: var(--border-secondary);
+    margin: 0;
+  }
+
+  .uploadDetail p {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: var(--secondary-font);
+    margin: 0;
+  }
+
+  .uploadDetail {
+    gap: 0 !important;
+  }
+
+  .uploadRequirements {
+    border-radius: 14px;
+    border: 1px solid var(--accent-secondary);
+    box-shadow: 0px 1px 2px -1px #0000001a;
+
+    box-shadow: 0px 1px 3px 0px #0000001a;
+  }
+
+  .fileReq {
+    background: #1152f51a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 20px;
+    border-bottom: 1px solid var(--accent-secondary);
+  }
+
+  .fileReq p {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.31px;
+    color: var(--border-secondary);
+    margin: 0;
+  }
+
+  .reqs {
+    padding: 20px 0 0 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .req {
+    display: flex;
+    gap: 12px;
+  }
+
+  .req img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .req h5 {
+    margin: 0;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: var(--border-secondary);
+  }
+
+  .req p {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: var(--secondary-font);
+    margin-top: 2px;
+  }
+
+  .btnsHolder {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 34px;
+  }
+
+  .recommendationBlock
+
+  /* .uploadBlock  */
+    {
+    display: none;
+  }
+
+  /*---------------Animation of accordians---------------*/
+
+  /* Collapsible targets */
+  .box-holder,
+  .cut-group,
+  .mesurement-section {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+
+    transition: all 0.8s;
+  }
+
+  /* Open state */
+  .section.is-open .box-holder,
+  .section.is-open .cut-group,
+  .section.is-open .mesurement-section,
+  .section.is-open .measurement-para {
+    max-height: 2000px;
+    /* safely large */
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Clickable header */
+  .section>.flex {
+    cursor: pointer;
+  }
+
+  /* Arrow rotation (optional but sexy) */
+  .section>.flex img {
+    transition: transform 0.3s ease;
+  }
+
+  .section.is-open>.flex img {
+    transform: rotate(180deg);
+  }
+
+  .recom-box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .recom {
+    border-radius: 14px;
+    border: 1px solid var(--borders-color);
+    background: var(--dropdown-background);
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .recom-img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .recom-pills-holder {
+    display: flex;
+    gap: 12px;
+  }
+
+  .recom-heading {
+    font-family: var(--font-family);
+    color: var(--primary-font);
+    font-size: 16px;
+    margin: 0 0 8px;
+    text-transform: capitalize;
+  }
+
+  .recom-size {
+    font-family: var(--font-family);
+    color: var(--secondary-font);
+    margin: 0 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .recom-size span {
+    color: var(--primary-font);
+    font-size: 26px;
+  }
+
+  .match-green p {
+    color: var(--font-green);
+  }
+
+  .match-blue p {
+    color: var(--font-blue);
+  }
+
+  .match-yellow p {
+    color: var(--font-yellow);
+  }
+
+  .match-red p {
+    color: var(--font-red);
+  }
+
+  .productBulkSelection {
+    margin-top: 32px;
+  }
+
+  .readyToMeasure {
+    padding-top: 20px;
+    border-top: 2px solid var(--border-secondary);
+  }
+
+  .readyToMeasure div {
+    display: flex;
+    gap: 100px;
+  }
+
+  #download-csv {
+    min-width: 260px;
+  }
+
+  #uploadBlock {
+    background: var(--dropdown-background);
+    padding: 16px;
+    border: 1px solid var(--borders-color);
+    border-radius: 14px;
+    margin-bottom: 32px;
+  }
+
+  .para-csv {
+    margin-bottom: 10px;
+  }
+
+  .csvSize {
+    font-family: var(--font-family);
+    color: var(--secondary-font);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    margin: 5px 0 0;
+  }
+
+  .grey {
+    background: var(--borders-color);
+  }
+
+  .csvDetails {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .noRows {
+    color: var(--font-green);
+  }
+
+  .uploaded {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .close {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+  }
+
+  .uploadedCsvDetails {
+    display: flex;
+    gap: 12px;
+  }
+
+  .uploadedCsvDetails img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .uploadedCsvDetails .heading {
+    font-size: 14px;
+  }
+
+  .uploaded {
+    border-radius: 10px;
+    padding: 12px;
+    background: var(--dropdown-background);
+  }
+
+  .uploadsBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #uploadBlock {
+    display: none;
+  }
+
+  .validationStats {
+    display: flex;
+    gap: 17px;
+  }
+
+  .validation {
+    border-radius: 14px;
+    padding: 20px;
+    background: var(--dropdown-background);
+    border: 1px solid var(--borders-color);
+    flex: 1;
+  }
+
+  .validationHeading p {
+    font-family: var(--font-family);
+    color: var(--secondary-font);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    margin: 0;
+  }
+
+  .validationHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .validation>p {
+    font-family: var(--font-family);
+    color: var(--primary-font);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    letter-spacing: -0.35px;
+    margin: 4px 0 0;
+  }
+
+  .sucess {
+    border-color: #00a63e;
+    background: #00a63e1a;
+  }
+
+  .sucess p {
+    color: #00a63e;
+  }
+
+  .errors {
+    border-color: #e7000b;
+    background: #e7000b1a;
+  }
+
+  .errors p,
+  .unvalidated {
+    color: #e7000b;
+  }
+
+  .teamResult,
+  .calculatingTeams {
+    max-width: 1440px;
+    margin: auto;
+    border-radius: 16px;
+    padding: 32px;
+    background: var(--background-card);
+    display: none;
+  }
+
+  .howToFixErrorBlock {
+    display: flex;
+    align-items: center;
+  }
+
+  .howToFixErrorBlock img {
+    min-width: 20px;
+    min-height: 20px;
+    padding: 8px;
+    border-radius: 33554400px;
+    background: var(--borders-color);
+  }
+
+  .howToFixDetail {
+    margin-left: 16px;
+    /* width: 80%; */
+  }
+
+  .howToFixDetail h3 {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: var(--accent-color);
+    margin: 0;
+  }
+
+  .howToFixDetail p {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22.75px;
+    letter-spacing: -0.15px;
+    color: var(--secondary-font);
+    margin-top: 4px;
+  }
+
+  .para-bulk {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .para-bulk img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .para-bulk p {
+    margin: 0;
+  }
+
+  /*----------------Table Styles-------------------*/
+
+  .table-wrapper {
+    background: #0f1623;
+    border-radius: 12px;
+    overflow-x: auto;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .data-table thead {
+    background: #00020566;
+  }
+
+  .centered {
+    text-align: center !important;
+  }
+
+  .data-table th {
+    padding: 24px;
+    text-align: left;
+    color: #9ca3af;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    border: none;
+    border-bottom: 1px solid #1f2937;
+  }
+
+  .data-table .sub-header th {
+    font-size: 12px;
+    color: #6b7280;
+    background: #0b1220;
+  }
+
+  .data-table td {
+    padding: 20px;
+    white-space: nowrap;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid #1f2937;
+  }
+
+  .data-table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.06);
+  }
+
+  tbody tr {
+    background: #161921;
+    height: 70px;
+  }
+
+  /* Confidence Pill */
+  .confidence {
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .confidence span {
+    font-size: 11px;
+    font-weight: 400;
+  }
+
+  .confidence.high {
+    color: #22c55e;
+  }
+
+  th img {
+    margin-left: 6px;
+  }
+
+  /* Footer */
+  .table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    font-size: 14px;
+    color: rgb(156, 163, 175);
+    background: #00020566;
+  }
+
+  /* Pagination */
+  .pagination {
+    display: flex;
+    gap: 6px;
+    margin: 0;
+  }
+
+  .page-btn {
+    background: #111827;
+    border: 1px solid #1f2937;
+    color: #9ca3af;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .page-btn:hover {
+    background: #1f2937;
+  }
+
+  .page-btn.active {
+    background: var(--hover-color);
+    color: #ffffff;
+  }
+
+  .table-wrapper::-webkit-scrollbar,
+  .file-tabs::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+
+  .table-wrapper::-webkit-scrollbar-thumb,
+  .file-tabs::-webkit-scrollbar-thumb {
+    background: #1f2937;
+    border-radius: 4px;
+  }
+
+  .table-wrapper::-webkit-scrollbar-track,
+  .file-tabs::-webkit-scrollbar-track {
+    background: #0b1220;
+  }
+
+  .table-holder {
+    border: 1px solid var(--borders-color);
+    border-radius: 14px;
+  }
+
+  .errorHeading {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  /*-----------------Chart css----------*/
+  .measurements-card {
+    border-radius: 8px;
+    padding: 16px 12px;
+    background: var(--dropdown-background);
+    width: 100%;
+    max-width: 310px;
+  }
+
+  .measurements-card .pill {
+    font-size: 10px;
+    width: fit-content;
+    margin: auto;
+    margin-top: 16px;
+    text-transform: capitalize;
+  }
+
+  .card-title {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+
+  .measurements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: #0b1020;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .measure {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .label {
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 15px;
+    letter-spacing: 0.62px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--secondary-font);
+    padding: 9px 12px;
+    background: var(--dropdown-background);
+  }
+
+  .value {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    text-align: center;
+    padding: 13px 16px;
+    background: #161921;
+  }
+
+  .match-green,
+  .match-red,
+  .match-yellow,
+  .match-blue {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px !important;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+  }
+
+  .match-green {
+    color: var(--font-green) !important;
+  }
+
+  .match-green .upPill {
+    background: var(--font-green) !important;
+  }
+
+  .match-yellow .upPill {
+    background: var(--font-yellow) !important;
+  }
+
+  .match-red .upPill {
+    background: var(--font-red) !important;
+  }
+
+  .match-yellow {
+    color: var(--font-yellow) !important;
+  }
+
+  .match-red {
+    color: var(--font-red) !important;
+  }
+
+  .match-blue {
+    color: var(--font-blue) !important;
+  }
+
+  .pillFlex {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .recommHead {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: -0.39px;
+    margin: 0;
+  }
+
+  .errorRow {
+    border-left: 2px solid #e7000b;
+  }
+
+  /*----------------Size Distribution block and radio------------------*/
+
+  .size-distribution-container {
+    background: var(--dropdown-background);
+    border-radius: 10px;
+    border: 1px solid var(--borders-color);
+    padding: 29px 17px;
+    max-width: 100%;
+  }
+
+  .size-dropdown {
+    text-align: right;
+    margin-bottom: 12px;
+  }
+
+  .size-dropdown select {
+    font-family: var(--font-family);
+    background: #2c2c3e;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .size-bar {
+    display: flex;
+    height: 40px;
+    border-radius: 12px;
+    max-width: 680px;
+    margin: 12px 0 20px;
+    overflow: hidden;
+  }
+
+  .size-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0px;
+    color: var(--border-secondary);
+  }
+
+  .size-container {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .size-container>div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .size-total {
+    white-space: nowrap;
+  }
+
+  .size-total,
+  .size-container p {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    color: var(--secondary-font);
+  }
+
+  /* File Tabs */
+  .file-tabs {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    background: var(--accent-secondary);
+    padding: 4px;
+    border-radius: 10px;
+    margin: 32px 0;
+  }
+
+  .file-tab {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .file-tab:hover {
+    background: var(--dropdown-background);
+  }
+
+  .file-tab.active {
+    background: var(--borders-color);
+  }
+
+  /*-------------Color of dots-----------------------*/
+  .size-container .dot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .size-container p {
+    margin: 0;
+  }
+
+  .dot-yxs {
+    background-color: #cce5ff;
+  }
+
+  .dot-ys {
+    background-color: #99ccff;
+  }
+
+  .dot-ym {
+    background-color: #66b2ff;
+  }
+
+  .dot-yl {
+    background-color: #3399ff;
+  }
+
+  .dot-yxl {
+    background-color: #007fff;
+  }
+
+  .dot-y2xl {
+    background-color: #0066cc;
+  }
+
+  .dot-xs {
+    background-color: #0052a3;
+  }
+
+  .dot-s {
+    background-color: #003d80;
+  }
+
+  .dot-m {
+    background-color: #002966;
+  }
+
+  .dot-l {
+    background-color: #001f4d;
+  }
+
+  .dot-xl {
+    background-color: #001533;
+  }
+
+  .dot-xxl {
+    background-color: #000d1a;
+  }
+
+  .dot-xxxl {
+    background-color: #00071a;
+  }
+
+  .popUpdivOverlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background: rgb(0, 0, 0, 0.9);
+    display: none;
+  }
+
+  .popUpDiv {
+    background: #00040ed1;
+    padding: 32px;
+    border-radius: 16px;
+    max-width: 980px;
+    width: 100%;
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    top: 50%;
+    max-height: 600px;
+    overflow: auto;
+  }
+
+  .scrollArea {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+  }
+
+  .popUpDiv::-webkit-scrollbar {
+    width: 10px;
+    /* width of the scrollbar */
+    height: 10px;
+    /* for horizontal scroll */
+  }
+
+  .popUpDiv::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 5px;
+  }
+
+  .popUpDiv::-webkit-scrollbar-thumb {
+    background-color: #888;
+    /* thumb color */
+    border-radius: 5px;
+    border: 2px solid #f0f0f0;
+    /* padding around thumb */
+  }
+
+  .popUpDiv::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+    /* thumb hover color */
+  }
+
+  .upPill {
+    height: 8px;
+    width: 5px;
+    border-radius: 33554400px;
+  }
+
+  .popUpHeading {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 100%;
+    margin: 0;
+  }
+
+  .tooltip-js p,
+  .tooltip-js h4 {
+    margin: 0;
+  }
+
+  .tooltip-js {
+    position: absolute;
+    font-family: var(--font-family);
+    font-style: italic;
+    background: blur(8px);
+    border: 1px solid #ffffff1a;
+    width: 284px;
+    height: 330px;
+    border-radius: 7px;
+    padding: 8px;
+    color: #999999;
+    background: rgba(23, 23, 23, 0.7);
+    font-size: 14px;
+    pointer-events: none;
+    /* tooltip won’t block mouse */
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .tooltip-icon,
+  .tooltip-icon-individual {
+    cursor: pointer;
+  }
+
+  @media (max-width: 992px) {
+    .recom-box {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 786px) {
+
+    /*------------Individual Sizing--------------*/
+    .holder,
+    .uploadBlock,
+    .calculatingTeams,
+    .teamResult {
+      padding: 20px 12px;
+    }
+
+    .border .flex,
+    .section>.flex {
+      flex-direction: row;
+    }
+
+    .box-holder {
+      flex-direction: column;
+    }
+
+    .input-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .flex {
+      flex-direction: column;
+    }
+
+    .measurements-card {
+      flex: 1;
+      width: 100%;
+    }
+
+    /*-----------------Bulk Sizing------------------*/
+    .readyToMeasure div {
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .icons-holder {
+      flex-wrap: wrap;
+    }
+
+    .icons-holder {
+      padding-top: 20px;
+    }
+
+    .icon {
+      margin: 0;
+    }
+
+    .uploadBox {
+      flex-direction: column;
+    }
+
+    .validationStats {
+      flex-direction: column;
+    }
+
+    .howToFixErrorBlock {
+      flex-direction: column;
+      padding: 12px;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .howToFixErrorBlock img {
+      display: none;
+    }
+
+    .documentation {
+      margin: 0;
+    }
+
+    .howToFixDetail {
+      margin: 0;
+    }
+
+    .howToFixDetail p {
+      margin-top: 12x;
+    }
+
+    .btn-holder {
+      flex-direction: column;
+      margin: 24px 0;
+      width: 100%;
+    }
+
+    .btn-holder .btn {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .teamResult .flex {
+      align-items: flex-start;
+    }
+
+    .teamResult .flex .para-bulk {
+      margin-bottom: 0;
+    }
+
+    .size-distribution-container .flex {
+      flex-direction: row;
+    }
+
+    .size-distribution-container {
+      padding: 16px;
+    }
+
+    .size-distribution-container .flex:nth-of-type(2) {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .size-container {
+      gap: 12px;
+    }
+
+    .file-tabs {
+      overflow-x: auto;
+    }
+
+    .file-tab {
+      white-space: nowrap;
+    }
+
+    .popUpDiv {
+      margin: 0 12px;
+    }
+
+    .popUpDiv .flex {
+      flex-direction: row;
+    }
+
+    .size-dropdown {
+      margin: 0;
+    }
+  }
+</style>
+
+<div class="sizing-tool">
+  <div class="holder">
+    <div class="status-holder status-left">
+      <div class="status">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/circle.webp" alt="" />
+        <p id="status">Individual Sizing</p>
+      </div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <h2 class="heading">Find Your Perfect Fit</h2>
+    <p class="para">
+      Our Al analyzes your body measurements against manufacturers garment
+      measurements for 99% accuracy, our garments are made for a performance
+      fit. If you would like a more relaxed fit, you should consider sizing up!
+    </p>
+    <div class="tabs">
+      <input type="radio" name="tab" value="individual" id="individual-sizing" checked />
+      <label for="individual-sizing">Individual</label>
+
+      <input type="radio" name="tab" id="team-sizing" value="team" />
+      <label for="team-sizing">Bulk Team</label>
+    </div>
+    <div id="individual-content">
+      <div class="section">
+        <div class="flex">
+          <h3 class="heading heading-small heading-star">Select Product</h3>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+        </div>
+
+        <div class="box-holder">
+          <div class="box">
+            <h4 class="para para-small">Tops</h4>
+
+            <div class="border">
+              <div class="flex">
+                <p class="box">Short Sleeve</p>
+                <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+              </div>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="checkbox" name="short-sleeved" value="soccer-jersey" />
+                  <div class="card-content">Soccer Jersey</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="short-sleeved" value="basketball-jersey" />
+                  <div class="card-content">Basketball Jersey</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="short-sleeved" value="baseball-jersey" />
+                  <div class="card-content">Baseball Jersey</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="short-sleeved" value="t-shirt" />
+                  <div class="card-content">T-Shirt</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="short-sleeved" value="golf" />
+                  <div class="card-content">Golf/Polo</div>
+                </label>
+              </div>
+            </div>
+
+            <div class="border">
+              <div class="flex">
+                <p>Long Sleeve</p>
+                <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+              </div>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="checkbox" name="long-sleeved" value="warm-up-top" />
+                  <div class="card-content">Warm Up Top</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="long-sleeved" value="1/2 Zip Top" />
+                  <div class="card-content">1/2 Zip Top</div>
+                </label>
+              </div>
+            </div>
+
+            <div class="border">
+              <div class="flex">
+                <p>Hoodies & Jacket</p>
+                <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+              </div>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="checkbox" name="hoodies" value="hoodie" />
+                  <div class="card-content">Hoodie</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="hoodies" value="tracksuit-jacket" />
+                  <div class="card-content">Tracksuit Jacket</div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="box">
+            <h4 class="para para-small">Bottoms</h4>
+            <div class="border">
+              <div class="flex">
+                <p class="box">Shorts</p>
+                <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+              </div>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="checkbox" name="shorts" value="soccer-shorts" />
+                  <div class="card-content">Soccer Shorts</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="shorts" value="basketball-shorts" />
+                  <div class="card-content">Basketball Shorts</div>
+                </label>
+              </div>
+            </div>
+            <div class="border">
+              <div class="flex">
+                <p class="box">Pants</p>
+                <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+              </div>
+              <div class="radio-group">
+                <label class="radio-card">
+                  <input type="checkbox" name="pants" value="tracksuit-pants" />
+                  <div class="card-content">Tracksuit Pants</div>
+                </label>
+                <label class="radio-card">
+                  <input type="checkbox" name="pants" value="baseball-pants" />
+                  <div class="card-content">Baseball Pants(full-length)</div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="flex">
+          <h3 class="heading heading-small heading-star">Cut Type</h3>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+        </div>
+        <div class="radio-group cut-group">
+          <label class="radio-card">
+            <input type="radio" name="cut" value="men" />
+            <div class="card-content cut-content">Male</div>
+          </label>
+
+          <label class="radio-card">
+            <input type="radio" name="cut" value="women" />
+            <div class="card-content cut-content">Female</div>
+          </label>
+        </div>
+      </div>
+      <div class="section">
+        <div class="flex">
+          <h3 class="heading heading-small heading-star">Body Measurements</h3>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
+        </div>
+        <p class="para measurement-para">Enter your body measurements</p>
+        <div class="mesurement-section">
+          <div class="radio-group measurement-group">
+            <label class="radio-card">
+              <input type="radio" name="measurement" value="inches" selected />
+              <div class="card-content measurement-content">Inches</div>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="measurement" value="cm" checked />
+              <div class="card-content measurement-content">CM</div>
+            </label>
+          </div>
+          <div class="input-block">
+            <div class="input-holder">
+              <label>Chest Circumference</label>
+              <input type="number" placeholder="e.g., 92" id="chest" />
+            </div>
+            <div class="input-holder">
+              <label>Waist Circumference</label>
+              <input type="number" placeholder="e.g., 82" id="waist" />
+            </div>
+            <div class="input-holder">
+              <label>Height</label>
+              <input type="number" placeholder="e.g., 177" id="height" />
+            </div>
+          </div>
+          <div class="section help-block">
+            <div class="help-initial">
+              <img src="https://xsuniforms.com/wp-content/uploads/2026/01/ruler.webp" alt="" />
+              <p>Need Help?</p>
+            </div>
+
+            <p class="lower-line">
+              Not sure how to measure yor size accurately?
+              <a href="https://www.xsuniforms.com/sizing-tool-guide/">See our guide.</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="btn-holder">
+        <button class="btn btn-tertiary" id="clearIndividual">Clear</button>
+        <button class="btn btn-disabled" id="calculateIndividual">
+          Calculate Sizes
+        </button>
+      </div>
+    </div>
+    <div id="team-content">
+      <div class="section">
+        <div class="heading heading-team">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/ruler-blue.webp" alt="" />
+          <h3>Measurement Standards</h3>
+        </div>
+        <div>
+          <h3 class="heading heading-small heading-preffered">
+            Preferred Units
+          </h3>
+          <div class="radio-group measurement-group">
+            <label class="radio-card">
+              <input type="radio" name="measurementTeam" value="inches" selected />
+              <div class="card-content measurement-content">Inches</div>
+            </label>
+
+            <label class="radio-card">
+              <input type="radio" name="measurementTeam" value="cm" />
+              <div class="card-content measurement-content">CM</div>
+            </label>
+          </div>
+          <p class="para para-small">
+            This will determine the format of your CSV template.
+          </p>
+        </div>
+        <div class="productBulkSelection">
+          <h3 class="heading heading-small heading-star">Product Selection</h3>
+          <p class="para para-small">
+            For bulk orders, product selection is handled per individual.
+            Download the CSV template to specify the product and sizing for each
+            team member. The template is structured to accommodate multi-product
+            selection for each entry.
+          </p>
+        </div>
+        <div class="readyToMeasure">
+          <h3 class="heading heading-small">Ready to measure?</h3>
+          <div>
+            <p class="para measurement-para">
+              For bulk orders, product selection is handled per individual.
+              Download the CSV template to specify the product and sizing for
+              each team member. The template is structured to accommodate
+              multi-product selection for each entry.
+            </p>
+            <button class="btn btn-primary btn-hold" id="download-csv">
+              <img src="https://xsuniforms.com/wp-content/uploads/2026/01/download.png" alt="" />Download CSV Template
+            </button>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="btn btn-disabled" id="uploadTeam">
+            Next: Upload Data
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="section icons-holder">
+      <div class="icon">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/shield.webp" alt="" />
+        <p>Data Privacy Guaranteed</p>
+      </div>
+      <div class="icon">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/ruler-grey.webp" alt="" />
+        <p>99% Accuracy</p>
+      </div>
+      <div class="icon">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/lock.webp" alt="" />
+        <p>Secure Processing</p>
+      </div>
+    </div>
+  </div>
+  <div class="analzing-block">
+    <div class="status-holder">
+      <div class="dot"></div>
+      <div class="status">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/circle.webp" alt="" />
+        <p id="status">Calculating</p>
+      </div>
+      <div class="dot"></div>
+    </div>
+    <div class="radar">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring"></div>
+      <div class="icon-box">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/box.webp" alt="Box" />
+      </div>
+    </div>
+    <div class="individual-analyzse">
+      <h2 class="heading heading-analyze">Calculating your best fit</h2>
+      <p class="para para-analyze">
+        We are analyzing your body measurements against our brand database to
+        find your perfect size match.
+      </p>
+    </div>
+    <div class="team-analyzse">
+      <h2 class="heading heading-analyze">Analyzing fit profiles</h2>
+      <p class="para para-analyze">
+        Our AI is processing your bulk upload data for the optimal sizing
+        recommendations
+      </p>
+    </div>
+    <div class="processing-card">
+      <h4 class="heading">processing</h4>
+      <div class="percentage-holder">
+        <p class="analysze">Analyzing measurements</p>
+        <p class="percentage"><span>59</span>%</p>
+      </div>
+      <div class="percentage-bar-holder">
+        <div class="percentage-bar"></div>
+        <div class="percentage-progress-bar"></div>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="bar-holder">
+            <div class="bar-progress"></div>
+            <div class="bar"></div>
+          </div>
+          <p>Scan</p>
+        </div>
+        <div class="step">
+          <div class="bar-holder">
+            <div class="bar-progress"></div>
+            <div class="bar"></div>
+          </div>
+          <p>Analyse</p>
+        </div>
+        <div class="step">
+          <div class="bar-holder">
+            <div class="bar-progress"></div>
+            <div class="bar"></div>
+          </div>
+          <p>Match</p>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-cancel" id="btnCancel">
+      <img src="https://xsuniforms.com/wp-content/uploads/2026/01/redCross.png" alt="" />Cancel Processing
+    </button>
+  </div>
+  <div class="recommendationBlock">
+    <div class="status-holder status-right">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="status">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/circle.webp" alt="" />
+        <p id="status">Results</p>
+      </div>
+    </div>
+    <div class="individual-recomm">
+      <div class="flex">
+        <div>
+          <h2 class="heading heading-recomm">
+            Your Personalised Size Recommendations
+          </h2>
+          <p class="para para-recomm">
+            Based on your body measurements, following are your personalised
+            size recommendations
+          </p>
+        </div>
+        <div class="measurements-card">
+          <h3 class="card-title">Body Measurements</h3>
+
+          <div class="measurements-grid">
+            <div class="measure" data-key="chest">
+              <span class="label">CHEST</span>
+              <span class="value">0.0</span>
+            </div>
+
+            <div class="measure" data-key="waist">
+              <span class="label">WAIST</span>
+              <span class="value">0.0</span>
+            </div>
+
+            <div class="measure" data-key="height">
+              <span class="label">HEIGHT</span>
+              <span class="value">0.0</span>
+            </div>
+          </div>
+          <div class="pill">Gender : <span id="genderIndl"></span></div>
+        </div>
+      </div>
+      <h3 class="recommHead">Tops</h3>
+      <div class="recom-box" id="individualRecommsTop"></div>
+      <h3 class="recommHead">Bottoms</h3>
+      <div class="recom-box" id="individualRecommsBot"></div>
+      <button class="btn btn-tertiary" id="recalculateIndividual">
+        Recalculate
+      </button>
+    </div>
+  </div>
+  <div class="uploadBlock">
+    <div class="status-holder">
+      <div class="dot"></div>
+      <div class="status">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/circle.webp" alt="" />
+        <p id="status">Upload</p>
+      </div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+
+    <h2 class="heading heading-recomm">Upload Team Data</h2>
+    <p class="para para-recomm para-csv">
+      Please upload the completed CSV template with your team's measurements.
+    </p>
+    <div id="uploadBlock">
+      <div class="heading heading-team">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/upload.webp" alt="" />
+        <h3>Uploaded Files (<span id="totalUploaded"></span>)</h3>
+      </div>
+      <div class="uploadsBlock"></div>
+    </div>
+    <div class="uploadBox">
+      <div class="upload">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/upload-icon.webp" alt="" />
+        <div class="uploadDetail">
+          <h3>Drag & drop your CSV here</h3>
+          <p>or browse your computer to select a file</p>
+        </div>
+        <div>
+          <button class="btn btn-secondary" id="browserFile">
+            Browser Files
+          </button>
+          <input type="file" id="fileInput" style="display: none" />
+          <div class="pill pill-grey">
+            <img src="https://xsuniforms.com/wp-content/uploads/2026/01/lock.webp" alt="" />
+            <p>Data is encrypted and secure</p>
+          </div>
+        </div>
+      </div>
+      <div class="uploadRequirements">
+        <div class="fileReq">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/req.webp" alt="" />
+          <p>File Requirements</p>
+        </div>
+        <div class="reqs">
+          <div class="req">
+            <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tick.webp" alt="" />
+            <div>
+              <h5>File Type</h5>
+              <p>.CSV files only</p>
+            </div>
+          </div>
+          <div class="req">
+            <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tick.webp" alt="" />
+            <div>
+              <h5>Max Size</h5>
+              <p>Up to 25MB per upload</p>
+            </div>
+          </div>
+          <div class="req">
+            <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tick.webp" alt="" />
+            <div>
+              <h5>Required Columns</h5>
+              <p>Name, Height, Weight, Gender</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="individual-recomm">
+      <div class="section help-block">
+        <div class="help-initial">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/ruler.webp" alt="" />
+          <p>Need Help?</p>
+        </div>
+
+        <p class="lower-line">
+          Not sure how to measure yor size accurately?
+          <a href="https://www.xsuniforms.com/sizing-tool-guide/">See our guide.</a>
+        </p>
+      </div>
+      <div class="btnsHolder">
+        <button class="btn btn-tertiary" id="backFromUpload">Back</button>
+        <button class="btn btn-disabled" id="toProcessing">Upload</button>
+      </div>
+      <div class="section icons-holder">
+        <div class="icon">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/shield.webp" alt="" />
+          <p>Data Privacy Guaranteed</p>
+        </div>
+        <div class="icon">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/ruler-grey.webp" alt="" />
+          <p>99% Accuracy</p>
+        </div>
+        <div class="icon">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/lock.webp" alt="" />
+          <p>Secure Processing</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="calculatingTeams">
+    <div class="status-holder">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="status">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/circle.webp" alt="" />
+        <p id="status">Calculating</p>
+      </div>
+      <div class="dot"></div>
+    </div>
+    <div class="flex">
+      <div>
+        <h2 class="heading heading-recomm">Validation Results</h2>
+        <p class="para para-recomm para-csv">
+          We found
+          <span id="noOfIssue" class="unvalidated"> 23 </span><span class="unvalidated"> issues</span>
+          that need your attention before we can process sizing.
+        </p>
+      </div>
+      <div class="btn-holder">
+        <button class="btn">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/download-grey.webp" alt="" />
+          Download Report
+        </button>
+        <button class="btn btn-secondary" id="reuploadCSV">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/reupload-icon.webp" alt="" />
+          Re-upload Corrected CSV
+        </button>
+      </div>
+    </div>
+
+    <div class="validationStats">
+      <div class="validation total">
+        <div class="validationHeading">
+          <p>Total Rows Processed</p>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/data.webp" alt="" />
+        </div>
+        <p id="totalRowsProcessed">365</p>
+      </div>
+      <div class="validation sucess">
+        <div class="validationHeading">
+          <p>Successful Entries</p>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tick.webp" alt="" />
+        </div>
+        <p id="totalRowsProcessedSucessfully">342</p>
+      </div>
+      <div class="validation errors">
+        <div class="validationHeading">
+          <p>Rows with Errors</p>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/error.webp" alt="" />
+        </div>
+        <p id="totalRowsProcessedWithError">342</p>
+      </div>
+    </div>
+    <div class="help-block howToFixErrorBlock">
+      <img src="https://xsuniforms.com/wp-content/uploads/2026/01/think.webp" alt="" />
+      <div class="howToFixDetail">
+        <h3>How to fix these errors</h3>
+        <p>
+          Download the detailed error report above. Correct the data in your
+          spreadsheet software (Excel, Numbers, Google Sheets) paying attention
+          to missing heights or invalid units. Save as CSV and re-upload.
+        </p>
+      </div>
+      <!-- <a href="" class="documentation">View Documentation</a> -->
+    </div>
+    <h3 class="heading heading-team errorHeading">Detailed Error Log</h3>
+    <div class="table-holder">
+      <div class="table-wrapper" id="errorTable">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Club/Org</th>
+              <th>Team/Age</th>
+              <th>Coach</th>
+              <th>Player Name</th>
+              <th>KIT #</th>
+              <th>SEX</th>
+              <th colspan="3" class="centered">
+                Player Measurements (<span class="measurementBulk"></span>)
+              </th>
+            </tr>
+            <tr class="sub-header">
+              <th colspan="6"></th>
+              <th>Chest</th>
+              <th>Waist</th>
+              <th>Height</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="errorRow">
+              <td>East Side Soccer</td>
+              <td>U16 Boys</td>
+              <td>Coach Davis</td>
+              <td>Jenkins</td>
+              <td>42</td>
+              <td>Male</td>
+
+              <td>94.0</td>
+              <td>45.5</td>
+              <td>81.0</td>
+              <td>102.0</td>
+              <td>178.0</td>
+            </tr>
+            <tr class="errorRow">
+              <td>East Side Soccer</td>
+              <td>U16 Boys</td>
+              <td>Coach Davis</td>
+              <td>Jenkins</td>
+              <td>42</td>
+              <td>Male</td>
+
+              <td>94.0</td>
+              <td>45.5</td>
+              <td>81.0</td>
+              <td>102.0</td>
+              <td>178.0</td>
+            </tr>
+            <tr class="errorRow">
+              <td>East Side Soccer</td>
+              <td>U16 Boys</td>
+              <td>Coach Davis</td>
+              <td>Jenkins</td>
+              <td>42</td>
+              <td>Male</td>
+
+              <td>94.0</td>
+              <td>45.5</td>
+              <td>81.0</td>
+              <td>102.0</td>
+              <td>178.0</td>
+            </tr>
+            <tr class="errorRow">
+              <td>East Side Soccer</td>
+              <td>U16 Boys</td>
+              <td>Coach Davis</td>
+              <td>Jenkins</td>
+              <td>42</td>
+              <td>Male</td>
+
+              <td>94.0</td>
+              <td>45.5</td>
+              <td>81.0</td>
+              <td>102.0</td>
+              <td>178.0</td>
+            </tr>
+
+            <!-- Duplicate rows as needed -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer" id="errorFooter">
+        <p>Showing 1–5 of 23 results</p>
+
+        <div class="pagination">
+          <button class="page-btn">
+            << /button>
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <button class="page-btn">></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="teamResult">
+    <div class="status-holder status-right">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="status">
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/circle.webp" alt="" />
+        <p id="status">Results</p>
+      </div>
+    </div>
+    <div class="flex">
+      <div>
+        <h2 class="heading heading-recomm">Bulk Sizing Results</h2>
+        <div class="para para-recomm para-bulk">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/calendar.webp" alt="" />
+          <p>Batch processed on <span id="processDate">Oct 24, 2023</span></p>
+          <div class="dot grey"></div>
+          <p><span id="totalIndividusalInCsv">45</span> individuals</p>
+        </div>
+      </div>
+      <div class="btn-holder">
+        <button class="btn btn-tertiary" id="recalculateCsvAfterCompletion">
+          Recalculate
+        </button>
+        <button class="btn btn-secondary" id="exportCSV">
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/download-white.png" alt="" />
+          Export to CSV
+        </button>
+      </div>
+    </div>
+    <div class="size-distribution-container">
+      <div class="flex">
+        <h3 class="heading heading-team">Size Distribution</h3>
+        <div class="size-dropdown">
+          <select id="sizeCategory">
+            <option value="top">Tops</option>
+            <option value="bottom">Bottoms</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Size Distribution Bar -->
+      <div class="size-bar">
+        <div class="size-segment dot-yxs">YXS</div>
+        <div class="size-segment dot-ys">YS</div>
+        <div class="size-segment dot-ym">YM</div>
+        <div class="size-segment dot-yl">YL</div>
+        <div class="size-segment dot-yxl">YXL</div>
+        <div class="size-segment dot-y2xl">Y2XL</div>
+        <div class="size-segment dot-xs">XS</div>
+        <div class="size-segment dot-s">S</div>
+        <div class="size-segment dot-m">M</div>
+        <div class="size-segment dot-l">L</div>
+        <div class="size-segment dot-xl">XL</div>
+        <div class="size-segment dot-xxl">XXL</div>
+        <div class="size-segment dot-xxxl">XXXL</div>
+      </div>
+
+      <!-- Lower Radio Buttons -->
+      <div class="flex">
+        <div class="size-container">
+          <div>
+            <div class="dot dot-yxs"></div>
+            <p><span>YXS</span> (<span>7</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-ys"></div>
+            <p><span>YS</span> (<span>8</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-ym"></div>
+            <p><span>YM</span> (<span>9</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-yl"></div>
+            <p><span>YL</span> (<span>10</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-yxl"></div>
+            <p><span>YXL</span> (<span>11</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-y2xl"></div>
+            <p><span>Y2XL</span> (<span>12</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-xs"></div>
+            <p><span>XS</span> (<span>13</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-s"></div>
+            <p><span>S</span> (<span>14</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-m"></div>
+            <p><span>M</span> (<span>15</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-l"></div>
+            <p><span>L</span> (<span>16</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-xl"></div>
+            <p><span>XL</span> (<span>17</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-xxl"></div>
+            <p><span>XXL</span> (<span>18</span>)</p>
+          </div>
+          <div>
+            <div class="dot dot-xxxl"></div>
+            <p><span>XXXL</span> (<span>19</span>)</p>
+          </div>
+        </div>
+        <div class="size-total">Total: 45 Items</div>
+      </div>
+
+      <!-- File Tabs -->
+    </div>
+    <div class="file-tabs">
+      <div class="file-tab active">team_roster_spring_2024.csv</div>
+      <div class="file-tab">team_roster_spring_2024.csv</div>
+      <div class="file-tab">team_roster_spring_2024.csv</div>
+    </div>
+
+    <div class="table-holder">
+      <div class="table-wrapper" id="processedTable">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Club/Org</th>
+              <th>Team/Age</th>
+              <th>Coach</th>
+              <th>Player Name</th>
+              <th>KIT #</th>
+              <th>SEX</th>
+              <th colspan="3" class="centered">
+                Player Measurements (<span class="measurementBulk"></span>)
+              </th>
+              <th colspan="5" class="centered">Recommendations</th>
+            </tr>
+            <tr class="sub-header">
+              <th colspan="6"></th>
+              <th>Chest</th>
+              <th>Waist</th>
+              <th>Height</th>
+              <th>
+                Top Size
+                <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info"
+                  class="tooltip-icon"
+                  data-tooltip="These are average size recommendations for tops and bottoms based on your measurements. To see detailed size suggestions for each individual product, open the full report." />
+              </th>
+              <th>Accuracy</th>
+              <th>
+                Bot Size
+                <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info"
+                  class="tooltip-icon"
+                  data-tooltip="These are average size recommendations for tops and bottoms based on your measurements. To see detailed size suggestions for each individual product, open the full report." />
+              </th>
+              <th>Accuracy</th>
+              <th></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>East Side Soccer</td>
+              <td>U16 Boys</td>
+              <td>Coach Davis</td>
+              <td>Jenkins</td>
+              <td>42</td>
+              <td>Male</td>
+              <td>Shorts</td>
+              <td>U16 Boys</td>
+              <td>M</td>
+              <td>30</td>
+              <td>94.0</td>
+              <td>45.5</td>
+              <td>81.0</td>
+              <td>102.0</td>
+              <td>178.0</td>
+              <td class="confidence high">
+                <button class="btn btn-special">Full Report</button>
+              </td>
+            </tr>
+
+            <!-- Duplicate rows as needed -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="table-footer" id="processedTableFooter">
+        <p>Showing 1-5 of 23 results</p>
+
+        <div class="pagination">
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="popUpdivOverlay">
+    <div class="popUpDiv">
+      <div>
+        <div class="flex">
+          <h2 class="popUpHeading" id="playerName">Jenkins</h2>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/close.webp" class="close" id="closePopUp"
+            alt="Remove" />
+        </div>
+        <p class="para para-recomm" id="clubName">East Side Soccer Club</p>
+      </div>
+      <div class="scrollArea">
+        <h3 class="recommHead">Tops</h3>
+        <div class="recom-box" id="individualPopRecommsTop"></div>
+        <h3 class="recommHead">Bottoms</h3>
+        <div class="recom-box" id="individualPopRecommsBot"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  /*----------------------Selectors*------------------------*/
+  const calculatingTeams = document.querySelector(".calculatingTeams");
+  const teamResult = document.querySelector(".teamResult");
+  const downloadCsv = document.getElementById("download-csv");
+  const toProcessingBtn = document.getElementById("toProcessing");
+  const individualAnalyze = document.querySelector(".individual-analyzse");
+  const containerTop = document.getElementById("individualRecommsTop");
+  const containerBottom = document.getElementById("individualRecommsBot");
+  const containerTopBulk = document.getElementById("individualPopRecommsTop");
+  const containerBottomBulk = document.getElementById(
+    "individualPopRecommsBot"
+  );
+  const popUpdivOverlay = document.querySelector(".popUpdivOverlay");
+  const clubName = document.getElementById("clubName");
+  const playerName = document.getElementById("playerName");
+  const chestInput = document.getElementById("chest");
+  const waistInput = document.getElementById("waist");
+  const heightInput = document.getElementById("height");
+  const genderIndl = document.getElementById("genderIndl");
+
+  /*------------Convert placeholder on selection------------------*/
+  const measurementRadios = document.querySelectorAll(
+    'input[name="measurement"]'
+  );
+
+  function updatePlaceholders(unit) {
+    const isCM = unit === "cm";
+
+    chestInput.placeholder = isCM ? "e.g., 92" : "e.g., 36";
+    waistInput.placeholder = isCM ? "e.g., 82" : "e.g., 32";
+    heightInput.placeholder = isCM ? "e.g., 177" : "e.g., 70";
+  }
+
+  measurementRadios.forEach((radio) => {
+    radio.addEventListener("change", (e) => {
+      updatePlaceholders(e.target.value);
+    });
+  });
+
+  /*---------------------CSV Template Download---------------------*/
+  let csvClicked = false;
+  downloadCsv.addEventListener("click", () => {
+    csvClicked = true;
+    const headers = [
+      "Club/Organization Name",
+      "Team Name or Age Group",
+      "Team Coach Name",
+      "Player Family Name",
+      "Player Jersey Number",
+      "Male Cut or Female Cut",
+      "Player Chest Circumference",
+      "Player Waist Circumference",
+      "Player Height Head to Toe",
+    ];
+
+    const csvContent = headers.join(",") + "\n";
+    const blob = new Blob([csvContent], {
+      type: "text/csv;charset=utf-8;",
+    });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "Csv Template.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+
+  /*Animation of dropdowns*/
+  const borders = document.querySelectorAll(".border");
+
+  borders.forEach((border) => {
+    const radioGroup = border.querySelector(".radio-group");
+    const arrowImg = border.querySelector(".flex img");
+
+    border.addEventListener("click", (e) => {
+      if (
+        e.target.tagName.toLowerCase() === "input" ||
+        e.target.closest("label")
+      )
+        return;
+
+      radioGroup.classList.toggle("show");
+
+      arrowImg.classList.toggle("rotated");
+    });
+  });
+
+  /*---------------------Tab Functionality---------------------*/
+
+  const status = document.getElementById("status");
+  const individualContent = document.getElementById("individual-content");
+  const teamContent = document.getElementById("team-content");
+
+  // Buttons
+  const calculateIndividual = document.getElementById("calculateIndividual");
+  const uploadBtn = document.getElementById("uploadTeam");
+
+  // Radio and input groups
+  const individualRadioGroups = ["tops", "cut", "measurement"];
+  const individualInputs = ["chest", "waist", "height"];
+
+  // Function to update tab content
+  function updateContent() {
+    const selected = document.querySelector('input[name="tab"]:checked');
+
+    status.textContent = selected.id;
+
+    if (selected.id === "individual-sizing") {
+      individualContent.style.display = "block";
+      teamContent.style.display = "none";
+      clearTeam();
+    } else if (selected.id === "team-sizing") {
+      individualContent.style.display = "none";
+      teamContent.style.display = "block";
+      clearIndividual();
+    }
+  }
+
+  function checkEnableIndividual() {
+    const topGroups = ["short-sleeved", "long-sleeved", "hoodies"];
+    const topSelected = topGroups.some((group) =>
+      document.querySelector(`input[name="${group}"]:checked`)
+    );
+
+    const bottomGroups = ["shorts", "pants"];
+    const bottomSelected = bottomGroups.some((group) =>
+      document.querySelector(`input[name="${group}"]:checked`)
+    );
+
+    const measurementSelected = !!document.querySelector(
+      'input[name="measurement"]:checked'
+    );
+
+    const requiredInputs = ["chest", "waist", "height"];
+    const inputsFilled = requiredInputs.every((id) => {
+      const el = document.getElementById(id);
+      return el && el.value.trim() !== "";
+    });
+
+    if (topSelected && bottomSelected && measurementSelected && inputsFilled) {
+      calculateIndividual.classList.add("btn-secondary");
+      calculateIndividual.classList.remove("btn-disabled");
+    } else {
+      calculateIndividual.classList.remove("btn-secondary");
+      calculateIndividual.classList.add("btn-disabled");
+    }
+  }
+
+  document
+    .querySelectorAll(
+      'input[type="checkbox"], input[type="radio"], input[type="number"]'
+    )
+    .forEach((el) => {
+      el.addEventListener("input", checkEnableIndividual);
+      el.addEventListener("change", checkEnableIndividual);
+    });
+
+  checkEnableIndividual();
+
+  // Enable/disable team upload button
+  function checkEnableTeam() {
+    const measurementSelected = document.querySelector(
+      'input[name="measurementTeam"]:checked'
+    );
+
+    if (measurementSelected) {
+      uploadBtn.classList.add("btn-secondary");
+      uploadBtn.classList.remove("btn-disabled");
+    } else {
+      uploadBtn.classList.remove("btn-secondary");
+      uploadBtn.classList.add("btn-disabled");
+    }
+  }
+
+  document
+    .querySelectorAll('input[name="measurementTeam"]')
+    .forEach((radio) => {
+      radio.addEventListener("change", checkEnableTeam);
+    });
+
+  function clearIndividual() {
+    document
+      .querySelectorAll(
+        'input[name="cut"], input[name="measurement"], input[name="short-sleeved"], input[name="long-sleeved"], input[name="hoodies"], input[name="shorts"], input[name="pants"]'
+      )
+      .forEach((el) => {
+        if (el.type === "checkbox" || el.type === "radio") el.checked = false;
+      });
+
+    document.querySelectorAll('input[type="number"]').forEach((el) => {
+      el.value = "";
+    });
+
+    const container = document.getElementById("individualRecomms");
+    if (container) container.innerHTML = "";
+
+    calculateIndividual.classList.remove("btn-secondary");
+    calculateIndividual.classList.add("btn-disabled");
+  }
+
+  function clearTeam() {
+    uploadBtn.classList.remove("btn-secondary");
+    uploadBtn.classList.add("btn-disabled");
+
+    const uploadedFiles = uploadsBlock.querySelectorAll(".uploaded");
+    uploadedFiles.forEach((fileDiv) => fileDiv.remove());
+
+    uploadBlock.style.display = "none";
+    totalUploaded.textContent = "0";
+
+    const radios = document.querySelectorAll('input[name="measurementTeam"]');
+    radios.forEach((radio) => (radio.checked = false));
+  }
+
+  individualRadioGroups.forEach((name) => {
+    document
+      .querySelectorAll(`input[name="${name}"]`)
+      .forEach((radio) =>
+        radio.addEventListener("change", checkEnableIndividual)
+      );
+  });
+  individualInputs.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("input", checkEnableIndividual);
+  });
+
+  const clearBtn = document.getElementById("clearIndividual");
+  clearBtn.addEventListener("click", clearIndividual);
+
+  document.querySelectorAll('input[name="tab"]').forEach((radio) =>
+    radio.addEventListener("change", () => {
+      updateContent();
+      checkEnableIndividual();
+      checkEnableTeam();
+    })
+  );
+
+  window.addEventListener("DOMContentLoaded", () => {
+    updateContent();
+    checkEnableIndividual();
+    checkEnableTeam();
+  });
+
+  /*---------------Animation of processing page ------------------*/
+  const btnCancel = document.getElementById("btnCancel");
+  const recalculateBtn = document.getElementById("recalculateIndividual");
+
+  const analyzingBlock = document.querySelector(".analzing-block");
+  const holder = document.querySelector(".holder");
+  const teamAnalyze = document.querySelector(".team-analyzse");
+  const recommendationBlock = document.querySelector(".recommendationBlock");
+
+  const individualTab = document.getElementById("individual-sizing");
+
+  const mainProgressBar = document.querySelector(".percentage-progress-bar");
+  const percentageText = document.querySelector(".percentage span");
+  const stepBars = document.querySelectorAll(".bar-progress");
+
+  const steps = [
+    { bar: stepBars[0], mainPercent: 33, speed: 1 },
+    { bar: stepBars[1], mainPercent: 66, speed: 2.5 },
+    { bar: stepBars[2], mainPercent: 100, speed: 0.02 },
+  ];
+
+  let animationIntervals = [];
+
+  function startAnimation(showTeamResultDirectly = false) {
+    btnCancel.innerHTML = `<img src="https://xsuniforms.com/wp-content/uploads/2026/01/redCross.png" alt="" />Cancel Processing`;
+    btnCancel.classList?.remove("green");
+    let currentStep = 0;
+    let mainPercent = 0;
+
+    function animateStep() {
+      const step = steps[currentStep];
+      let stepPercent = 0;
+
+      const stepInterval = setInterval(() => {
+        let increment = step.speed + Math.random() * 1.5;
+        stepPercent += increment;
+
+        let previousMain = currentStep ? steps[currentStep - 1].mainPercent : 0;
+        let stepProgressRatio = Math.min(stepPercent / 100, 1);
+        mainPercent =
+          previousMain + (step.mainPercent - previousMain) * stepProgressRatio;
+
+        if (stepPercent > 100) stepPercent = 100;
+        if (mainPercent > step.mainPercent) mainPercent = step.mainPercent;
+
+        step.bar.style.width = stepPercent + "%";
+        mainProgressBar.style.width = mainPercent + "%";
+        percentageText.textContent = Math.floor(mainPercent);
+
+        if (stepPercent >= 100) {
+          clearInterval(stepInterval);
+          animationIntervals = animationIntervals.filter(
+            (i) => i !== stepInterval
+          );
+          currentStep++;
+
+          if (currentStep < steps.length) {
+            setTimeout(animateStep, 300);
+          } else {
+            btnCancel.innerHTML = `<img src ="https://xsuniforms.com/wp-content/uploads/2026/01/simpleTick.webp" alt =""> Processing Successful`;
+            btnCancel.classList.add("green");
+            setTimeout(() => {
+              analyzingBlock.style.display = "none";
+
+              // Then decide what to show next
+              if (document.querySelector('input[name="cut"]:checked')) {
+                recommendationBlock.style.display = "block";
+              } else if (showTeamResultDirectly || errorRowsData.length === 0) {
+                teamResult.style.display = "block";
+              } else {
+                calculatingTeams.style.display = "block";
+              }
+            }, 2000);
+          }
+        }
+      }, 30);
+
+      animationIntervals.push(stepInterval);
+    }
+
+    animateStep();
+  }
+
+  calculateIndividual.addEventListener("click", () => {
+    individualAnalyze.style.display = "block";
+    const selectedCut = document.querySelector('input[name="cut"]:checked');
+    const selectedMeasurement = document.querySelector(
+      'input[name="measurement"]:checked'
+    ).value;
+
+    const chestMeasurementEl = document.getElementById("chest-measurement");
+    const chestMeasurementStatEl = document.getElementById(
+      "chest-measurement-stat"
+    );
+    const cutTypeEl = document.getElementById("cut-type");
+    genderIndl.innerText = selectedCut.value;
+
+    if (chestInput) {
+      const chestValue = chestInput.value;
+
+      if (chestMeasurementEl)
+        chestMeasurementEl.innerText =
+          chestValue + (selectedMeasurement === "inches" ? `"` : `cm`);
+
+      if (chestMeasurementStatEl)
+        chestMeasurementStatEl.innerText =
+          chestValue + (selectedMeasurement === "inches" ? `"` : `cm`);
+
+      if (cutTypeEl) cutTypeEl.innerText = selectedCut.value;
+    }
+
+    if (
+      calculateIndividual.classList.contains("btn-secondary") &&
+      individualTab.checked
+    ) {
+      analyzingBlock.style.display = "flex";
+      holder.style.display = "none";
+      teamAnalyze.style.display = "none";
+      recommendationBlock.style.display = "none";
+
+      stepBars.forEach((bar) => (bar.style.width = "0%"));
+      mainProgressBar.style.width = "0%";
+      percentageText.textContent = "0";
+
+      setTimeout(startAnimation, 1000);
+    }
+  });
+
+  btnCancel.addEventListener("click", () => {
+    animationIntervals.forEach((id) => clearInterval(id));
+    animationIntervals = []; // reset
+
+    mainProgressBar.style.width = "0%";
+    percentageText.textContent = "0";
+    steps.forEach((step) => {
+      step.bar.style.width = "0%";
+    });
+
+    const csvUploaded = uploadsBlock.querySelectorAll(".uploaded").length > 0;
+
+    if (csvUploaded) {
+      analyzingBlock.style.display = "none";
+      uploadMainBlock.style.display = "block";
+    } else if (individualTab.checked) {
+      analyzingBlock.style.display = "none";
+      holder.style.display = "block";
+      teamAnalyze.style.display = "flex";
+      recommendationBlock.style.display = "none";
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (recalculateBtn) {
+      recalculateBtn.addEventListener("click", () => {
+        if (recommendationBlock) recommendationBlock.style.display = "none";
+        if (holder) holder.style.display = "block";
+      });
+    }
+  });
+
+  /*-------------------Upload logic---------------------------*/
+  const uploadCsvBtn = document.getElementById("browserFile");
+  const fileInput = document.getElementById("fileInput");
+
+  uploadCsvBtn.addEventListener("click", () => {
+    fileInput.click();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const uploadBlock = document.querySelector(".uploadBlock");
+    const backBtn = document.getElementById("backFromUpload");
+
+    uploadBtn?.addEventListener("click", () => {
+      if (!uploadBtn.classList.contains("btn-secondary")) return;
+
+      uploadBlock.style.display = "block";
+      holder.style.display = "none";
+    });
+
+    backBtn?.addEventListener("click", () => {
+      uploadBlock.style.display = "none";
+      holder.style.display = "block";
+    });
+  });
+
+  document.querySelectorAll(".section > .flex").forEach((header) => {
+    header.addEventListener("click", () => {
+      const section = header.parentElement;
+      section.classList.toggle("is-open");
+    });
+  });
+
+  // -------------------- Globals --------------------
+  let sizingData = {
+    "tops": {
+      "youth-unisex": [
+        {
+          "label": "YXS",
+          "full": "Youth Extra Small",
+          "chest": [
+            66,
+            70
+          ],
+          "height": [
+            105,
+            115
+          ]
+        },
+        {
+          "label": "YS",
+          "full": "Youth Small",
+          "chest": [
+            71,
+            75
+          ],
+          "height": [
+            110,
+            120
+          ]
+        },
+        {
+          "label": "YM",
+          "full": "Youth Medium",
+          "chest": [
+            76,
+            80
+          ],
+          "height": [
+            123,
+            131
+          ]
+        },
+        {
+          "label": "YL",
+          "full": "Youth Large",
+          "chest": [
+            81,
+            85
+          ],
+          "height": [
+            135,
+            145
+          ]
+        },
+        {
+          "label": "YXL",
+          "full": "Youth Extra Large",
+          "chest": [
+            86,
+            90
+          ],
+          "height": [
+            147,
+            157
+          ]
+        }
+      ],
+      "men": [
+        {
+          "label": "XS",
+          "full": "Extra Small",
+          "chest": [
+            91,
+            98
+          ],
+          "height": [
+            160,
+            168
+          ]
+        },
+        {
+          "label": "S",
+          "full": "Small",
+          "chest": [
+            99,
+            104
+          ],
+          "height": [
+            168,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "chest": [
+            105,
+            108
+          ],
+          "height": [
+            175,
+            183
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "chest": [
+            109,
+            112
+          ],
+          "height": [
+            180,
+            188
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "chest": [
+            113,
+            116
+          ],
+          "height": [
+            185,
+            193
+          ]
+        },
+        {
+          "label": "2XL",
+          "full": "Double Extra Large",
+          "chest": [
+            117,
+            120
+          ],
+          "height": [
+            160,
+            190
+          ]
+        },
+        {
+          "label": "3XL",
+          "full": "Triple Extra Large",
+          "chest": [
+            121,
+            124
+          ],
+          "height": [
+            160,
+            190
+          ]
+        },
+        {
+          "label": "4XL",
+          "full": "Quadruple Extra Large",
+          "chest": [
+            125,
+            128
+          ],
+          "height": [
+            160,
+            190
+          ]
+        }
+      ],
+      "women": [
+        {
+          "label": "S",
+          "full": "Small",
+          "chest": [
+            91,
+            94
+          ],
+          "height": [
+            160,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "chest": [
+            95,
+            98
+          ],
+          "height": [
+            165,
+            180
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "chest": [
+            99,
+            102
+          ],
+          "height": [
+            168,
+            185
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "chest": [
+            103,
+            106
+          ],
+          "height": [
+            170,
+            188
+          ]
+        },
+        {
+          "label": "XXL",
+          "full": "Double Extra Large",
+          "chest": [
+            107,
+            110
+          ],
+          "height": [
+            172,
+            193
+          ]
+        },
+        {
+          "label": "XXXL",
+          "full": "Triple Extra Large",
+          "chest": [
+            111,
+            114
+          ],
+          "height": [
+            175,
+            198
+          ]
+        },
+        {
+          "label": "4XL",
+          "full": "Quadruple Extra Large",
+          "chest": [
+            115,
+            118
+          ],
+          "height": [
+            160,
+            190
+          ]
+        },
+        {
+          "label": "5XL",
+          "full": "Quintuple Extra Large",
+          "chest": [
+            119,
+            122
+          ],
+          "height": [
+            160,
+            190
+          ]
+        }
+      ]
+    },
+    "bottoms": {
+      "elastic-shorts": [
+        {
+          "label": "YS",
+          "full": "Youth Small",
+          "waist": [
+            71,
+            76
+          ],
+          "height": [
+            111,
+            119
+          ]
+        },
+        {
+          "label": "YM",
+          "full": "Youth Medium",
+          "waist": [
+            77,
+            82
+          ],
+          "height": [
+            123,
+            131
+          ]
+        },
+        {
+          "label": "YL",
+          "full": "Youth Large",
+          "waist": [
+            83,
+            88
+          ],
+          "height": [
+            135,
+            145
+          ]
+        },
+        {
+          "label": "YXL",
+          "full": "Youth Extra Large",
+          "waist": [
+            89,
+            94
+          ],
+          "height": [
+            147,
+            157
+          ]
+        },
+        {
+          "label": "XS",
+          "full": "Extra Small",
+          "waist": [
+            95,
+            100
+          ],
+          "height": [
+            160,
+            168
+          ]
+        },
+        {
+          "label": "S",
+          "full": "Small",
+          "waist": [
+            101,
+            108
+          ],
+          "height": [
+            168,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "waist": [
+            109,
+            114
+          ],
+          "height": [
+            175,
+            183
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "waist": [
+            115,
+            120
+          ],
+          "height": [
+            180,
+            188
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "waist": [
+            121,
+            124
+          ],
+          "height": [
+            185,
+            193
+          ]
+        },
+        {
+          "label": "XXL",
+          "full": "Double Extra Large",
+          "waist": [
+            125,
+            128
+          ],
+          "height": [
+            188,
+            198
+          ]
+        },
+        {
+          "label": "XXXL",
+          "full": "Triple Extra Large",
+          "waist": [
+            129,
+            132
+          ],
+          "height": [
+            190,
+            203
+          ]
+        }
+      ],
+      "tracksuit-pants": [
+        {
+          "label": "YXS",
+          "full": "Youth Extra Small",
+          "waist": [
+            65,
+            70
+          ],
+          "height": [
+            99,
+            107
+          ]
+        },
+        {
+          "label": "YS",
+          "full": "Youth Small",
+          "waist": [
+            71,
+            76
+          ],
+          "height": [
+            111,
+            119
+          ]
+        },
+        {
+          "label": "YM",
+          "full": "Youth Medium",
+          "waist": [
+            77,
+            82
+          ],
+          "height": [
+            123,
+            131
+          ]
+        },
+        {
+          "label": "YL",
+          "full": "Youth Large",
+          "waist": [
+            83,
+            88
+          ],
+          "height": [
+            135,
+            145
+          ]
+        },
+        {
+          "label": "YXL",
+          "full": "Youth Extra Large",
+          "waist": [
+            89,
+            94
+          ],
+          "height": [
+            147,
+            157
+          ]
+        },
+        {
+          "label": "XS",
+          "full": "Extra Small",
+          "waist": [
+            95,
+            100
+          ],
+          "height": [
+            160,
+            168
+          ]
+        },
+        {
+          "label": "S",
+          "full": "Small",
+          "waist": [
+            101,
+            108
+          ],
+          "height": [
+            168,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "waist": [
+            109,
+            114
+          ],
+          "height": [
+            175,
+            183
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "waist": [
+            115,
+            120
+          ],
+          "height": [
+            180,
+            188
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "waist": [
+            121,
+            124
+          ],
+          "height": [
+            185,
+            193
+          ]
+        },
+        {
+          "label": "XXL",
+          "full": "Double Extra Large",
+          "waist": [
+            125,
+            128
+          ],
+          "height": [
+            188,
+            198
+          ]
+        },
+        {
+          "label": "XXXL",
+          "full": "Triple Extra Large",
+          "waist": [
+            129,
+            132
+          ],
+          "height": [
+            190,
+            203
+          ]
+        }
+      ],
+      "baseball-pants": [
+        {
+          "label": "YXS",
+          "full": "Youth Extra Small",
+          "waist": [
+            65,
+            70
+          ],
+          "height": [
+            99,
+            107
+          ]
+        },
+        {
+          "label": "YS",
+          "full": "Youth Small",
+          "waist": [
+            71,
+            76
+          ],
+          "height": [
+            111,
+            119
+          ]
+        },
+        {
+          "label": "YM",
+          "full": "Youth Medium",
+          "waist": [
+            77,
+            82
+          ],
+          "height": [
+            123,
+            131
+          ]
+        },
+        {
+          "label": "YL",
+          "full": "Youth Large",
+          "waist": [
+            83,
+            88
+          ],
+          "height": [
+            135,
+            145
+          ]
+        },
+        {
+          "label": "YXL",
+          "full": "Youth Extra Large",
+          "waist": [
+            89,
+            94
+          ],
+          "height": [
+            147,
+            157
+          ]
+        },
+        {
+          "label": "XS",
+          "full": "Extra Small",
+          "waist": [
+            95,
+            100
+          ],
+          "height": [
+            160,
+            168
+          ]
+        },
+        {
+          "label": "S",
+          "full": "Small",
+          "waist": [
+            101,
+            108
+          ],
+          "height": [
+            168,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "waist": [
+            109,
+            114
+          ],
+          "height": [
+            175,
+            183
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "waist": [
+            115,
+            120
+          ],
+          "height": [
+            180,
+            188
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "waist": [
+            121,
+            124
+          ],
+          "height": [
+            185,
+            193
+          ]
+        },
+        {
+          "label": "XXL",
+          "full": "Double Extra Large",
+          "waist": [
+            125,
+            128
+          ],
+          "height": [
+            188,
+            198
+          ]
+        },
+        {
+          "label": "XXXL",
+          "full": "Triple Extra Large",
+          "waist": [
+            129,
+            132
+          ],
+          "height": [
+            190,
+            203
+          ]
+        }
+      ]
+    },
+    "jackets": {
+      "youth-unisex": [
+        {
+          "label": "YXS",
+          "full": "Youth Extra Small",
+          "chest": [
+            71,
+            76
+          ],
+          "height": [
+            99,
+            107
+          ]
+        },
+        {
+          "label": "YS",
+          "full": "Youth Small",
+          "chest": [
+            77,
+            82
+          ],
+          "height": [
+            111,
+            119
+          ]
+        },
+        {
+          "label": "YM",
+          "full": "Youth Medium",
+          "chest": [
+            83,
+            88
+          ],
+          "height": [
+            123,
+            131
+          ]
+        },
+        {
+          "label": "YL",
+          "full": "Youth Large",
+          "chest": [
+            89,
+            94
+          ],
+          "height": [
+            135,
+            145
+          ]
+        },
+        {
+          "label": "YXL",
+          "full": "Youth Extra Large",
+          "chest": [
+            95,
+            100
+          ],
+          "height": [
+            147,
+            157
+          ]
+        }
+      ],
+      "men": [
+        {
+          "label": "XS",
+          "full": "Extra Small",
+          "chest": [
+            101,
+            106
+          ],
+          "height": [
+            160,
+            168
+          ]
+        },
+        {
+          "label": "S",
+          "full": "Small",
+          "chest": [
+            107,
+            110
+          ],
+          "height": [
+            168,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "chest": [
+            111,
+            114
+          ],
+          "height": [
+            175,
+            183
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "chest": [
+            115,
+            118
+          ],
+          "height": [
+            180,
+            188
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "chest": [
+            119,
+            122
+          ],
+          "height": [
+            185,
+            193
+          ]
+        },
+        {
+          "label": "XXL",
+          "full": "Double Extra Large",
+          "chest": [
+            123,
+            126
+          ],
+          "height": [
+            188,
+            198
+          ]
+        },
+        {
+          "label": "XXXL",
+          "full": "Triple Extra Large",
+          "chest": [
+            127,
+            130
+          ],
+          "height": [
+            190,
+            203
+          ]
+        }
+      ],
+      "women": [
+        {
+          "label": "S",
+          "full": "Small",
+          "chest": [
+            107,
+            110
+          ],
+          "height": [
+            160,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "chest": [
+            111,
+            114
+          ],
+          "height": [
+            165,
+            180
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "chest": [
+            115,
+            118
+          ],
+          "height": [
+            168,
+            185
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "chest": [
+            119,
+            122
+          ],
+          "height": [
+            170,
+            188
+          ]
+        },
+        {
+          "label": "XXL",
+          "full": "Double Extra Large",
+          "chest": [
+            123,
+            126
+          ],
+          "height": [
+            172,
+            193
+          ]
+        },
+        {
+          "label": "XXXL",
+          "full": "Triple Extra Large",
+          "chest": [
+            127,
+            130
+          ],
+          "height": [
+            175,
+            198
+          ]
+        }
+      ]
+    },
+    "hoodies": {
+      "youth-unisex": [
+        {
+          "label": "YXS",
+          "full": "Youth Extra Small",
+          "chest": [
+            66,
+            70
+          ],
+          "height": [
+            99,
+            107
+          ]
+        },
+        {
+          "label": "YS",
+          "full": "Youth Small",
+          "chest": [
+            71,
+            76
+          ],
+          "height": [
+            111,
+            119
+          ]
+        },
+        {
+          "label": "YM",
+          "full": "Youth Medium",
+          "chest": [
+            77,
+            82
+          ],
+          "height": [
+            123,
+            131
+          ]
+        },
+        {
+          "label": "YL",
+          "full": "Youth Large",
+          "chest": [
+            83,
+            88
+          ],
+          "height": [
+            135,
+            145
+          ]
+        },
+        {
+          "label": "YXL",
+          "full": "Youth Extra Large",
+          "chest": [
+            89,
+            94
+          ],
+          "height": [
+            147,
+            157
+          ]
+        }
+      ],
+      "men": [
+        {
+          "label": "XS",
+          "full": "Extra Small",
+          "chest": [
+            95,
+            100
+          ],
+          "height": [
+            160,
+            168
+          ]
+        },
+        {
+          "label": "S",
+          "full": "Small",
+          "chest": [
+            101,
+            104
+          ],
+          "height": [
+            168,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "chest": [
+            105,
+            108
+          ],
+          "height": [
+            175,
+            183
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "chest": [
+            109,
+            112
+          ],
+          "height": [
+            180,
+            188
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "chest": [
+            113,
+            116
+          ],
+          "height": [
+            185,
+            193
+          ]
+        },
+        {
+          "label": "2XL",
+          "full": "Double Extra Large",
+          "chest": [
+            117,
+            120
+          ],
+          "height": [
+            160,
+            190
+          ]
+        },
+        {
+          "label": "3XL",
+          "full": "Triple Extra Large",
+          "chest": [
+            121,
+            124
+          ],
+          "height": [
+            160,
+            190
+          ]
+        },
+        {
+          "label": "4XL",
+          "full": "Quadruple Extra Large",
+          "chest": [
+            125,
+            128
+          ],
+          "height": [
+            160,
+            190
+          ]
+        }
+      ],
+      "women": [
+        {
+          "label": "S",
+          "full": "Small",
+          "chest": [
+            101,
+            104
+          ],
+          "height": [
+            160,
+            175
+          ]
+        },
+        {
+          "label": "M",
+          "full": "Medium",
+          "chest": [
+            105,
+            108
+          ],
+          "height": [
+            165,
+            180
+          ]
+        },
+        {
+          "label": "L",
+          "full": "Large",
+          "chest": [
+            109,
+            112
+          ],
+          "height": [
+            168,
+            185
+          ]
+        },
+        {
+          "label": "XL",
+          "full": "Extra Large",
+          "chest": [
+            113,
+            116
+          ],
+          "height": [
+            170,
+            188
+          ]
+        },
+        {
+          "label": "XXL",
+          "full": "Double Extra Large",
+          "chest": [
+            117,
+            120
+          ],
+          "height": [
+            172,
+            193
+          ]
+        },
+        {
+          "label": "XXXL",
+          "full": "Triple Extra Large",
+          "chest": [
+            121,
+            124
+          ],
+          "height": [
+            175,
+            198
+          ]
+        },
+        {
+          "label": "4XL",
+          "full": "Quadruple Extra Large",
+          "chest": [
+            125,
+            128
+          ],
+          "height": [
+            160,
+            190
+          ]
+        }
+      ]
+    }
+  };
+
+  // -------------------- Fetch JSON Data --------------------
+  // fetch("/data.json")
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     sizingData = data;
+  //   })
+  //   .catch((err) => console.error("Error loading sizing data:", err));
+
+  // -------------------- Utility Functions --------------------
+
+  // Convert inches to cm if needed
+  function convertToCM(value, unit) {
+    if (unit === "inches") return Math.round(value * 2.54);
+    return value;
+  }
+
+  // Determine fit type
+  function getFit(value, min, max) {
+    if (value < min) return "Too Small";
+    if (value > max) return "Loose";
+    return "Perfect";
+  }
+
+  // -------------------- Find Closest Size --------------------
+  function findClosestSize(
+    categoryData,
+    chestValue,
+    heightValue,
+    typeKeyPrimary,
+    typeKeySecondary
+  ) {
+    const unit =
+      document.querySelector('input[name="measurementTeam"]:checked')?.value ||
+      "cm";
+
+    const toCm = (val) => (unit === "inches" ? val * 2.54 : val);
+
+    const chestCm = toCm(chestValue);
+    const heightCm = toCm(heightValue);
+
+    // Step 1: Filter sizes where chest >= user chest (hard constraint)
+    const chestFits = categoryData.filter(
+      (size) => chestCm <= size[typeKeyPrimary][1]
+    );
+
+    if (chestFits.length === 0) {
+      // Chest larger than all → pick largest
+      return categoryData[categoryData.length - 1];
+    }
+
+    // Step 2: Check height and size up if needed
+    for (let i = 0; i < chestFits.length; i++) {
+      const size = chestFits[i];
+      const [hMin, hMax] = size[typeKeySecondary];
+
+      if (heightCm <= hMax) {
+        // Height fits → return this size
+        return size;
+      } else {
+        // Height too tall → size up
+        if (i + 1 < chestFits.length) {
+          continue; // check next chest-fitting size
+        } else {
+          // no bigger chest size left, pick largest available
+          return chestFits[chestFits.length - 1];
+        }
+      }
+    }
+
+    // Fallback (should never hit)
+    return chestFits[chestFits.length - 1];
+  }
+
+  function getCombinedMatchPercent(userValues, sizeObj, type) {
+    let primary, secondary;
+
+    if (type === "top" || type === "jacket") {
+      primary = {
+        min: sizeObj.chest[0],
+        max: sizeObj.chest[1],
+        value: userValues.chest,
+      };
+    } else {
+      primary = {
+        min: sizeObj.waist[0],
+        max: sizeObj.waist[1],
+        value: userValues.waist,
+      };
+    }
+
+    secondary = {
+      min: sizeObj.height[0],
+      max: sizeObj.height[1],
+      value: userValues.height,
+    };
+
+    const calculateScore = ({ min, max, value }, isHeight = false) => {
+      const center = (min + max) / 2;
+      const halfRange = (max - min) / 2;
+      const distance = Math.abs(value - center);
+
+      // comfortably centered (middle 40% of range)
+      if (distance <= halfRange * 0.4) return 100;
+
+      // within range but near edge
+      if (value >= min && value <= max) {
+        return Math.round(99 - (distance / halfRange) * 4); // 95–99
+      }
+
+      // outside range — measure inches outside
+      const outside = value < min ? min - value : value - max;
+
+      // up to ~1 inch outside
+      if (outside <= 2.54) {
+        return Math.round(94 - outside * 2); // 90–94
+      }
+
+      // height penalties are harsher
+      return isHeight ? 85 : 88;
+    };
+
+    const primaryScore = calculateScore(primary);
+    const heightScore = calculateScore(secondary, true);
+
+    // Height weighted more heavily
+    const combined = Math.round(primaryScore * 0.4 + heightScore * 0.6);
+
+    return Math.min(combined, 100);
+  }
+
+  // -------------------- Enable / Disable Button --------------------
+  function checkEnableIndividual() {
+    const genderSelected =
+      document.querySelector('input[name="cut"]:checked') !== null;
+    const measurementSelected =
+      document.querySelector('input[name="measurement"]:checked') !== null;
+
+    const chest = chestInput.value.trim() !== "";
+    const waist = waistInput.value.trim() !== "";
+    const height = heightInput.value.trim() !== "";
+
+    const topSelected =
+      document.querySelector(
+        'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
+      ) !== null;
+    const bottomSelected =
+      document.querySelector(
+        'input[name="shorts"]:checked, input[name="pants"]:checked'
+      ) !== null;
+
+    if (
+      genderSelected &&
+      measurementSelected &&
+      chest &&
+      waist &&
+      height &&
+      topSelected &&
+      bottomSelected
+    ) {
+      calculateIndividual.classList.add("btn-secondary");
+      calculateIndividual.classList.remove("btn-disabled");
+    } else {
+      calculateIndividual.classList.remove("btn-secondary");
+      calculateIndividual.classList.add("btn-disabled");
+    }
+  }
+
+  // -------------------- Render Recommendations --------------------
+  function renderRecommendations() {
+    if (!sizingData) return;
+
+    const genderInput =
+      document.querySelector('input[name="cut"]:checked')?.value || "male";
+    const measurementUnit =
+      document.querySelector('input[name="measurement"]:checked')?.value ||
+      "cm";
+
+    const chest = convertToCM(
+      parseFloat(document.getElementById("chest").value),
+      measurementUnit
+    );
+    const waist = convertToCM(
+      parseFloat(document.getElementById("waist").value),
+      measurementUnit
+    );
+    const height = convertToCM(
+      parseFloat(document.getElementById("height").value),
+      measurementUnit
+    );
+
+    const topInputs = [
+      ...document.querySelectorAll(
+        'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
+      ),
+    ];
+    const bottomInputs = [
+      ...document.querySelectorAll(
+        'input[name="shorts"]:checked, input[name="pants"]:checked'
+      ),
+    ];
+
+    containerTop.innerHTML = "";
+    containerBottom.innerHTML = "";
+
+    // Render Tops / Jackets
+    topInputs.forEach((el) => {
+      const selected = el.value;
+
+      let categoryData = selected.includes("jacket")
+        ? sizingData.jackets[genderInput] || sizingData.jackets["youth-unisex"]
+        : selected.includes("hoodie")
+          ? sizingData.hoodies[genderInput] || sizingData.hoodies["youth-unisex"]
+          : sizingData.tops[genderInput] || sizingData.tops["youth-unisex"];
+
+      const bestSize = findClosestSize(
+        categoryData,
+        chest,
+        height,
+        "chest",
+        "height"
+      );
+      const matchPercent = getCombinedMatchPercent(
+        { chest, height },
+        bestSize,
+        selected.includes("hoodie") || selected.includes("jacket")
+          ? "jacket"
+          : "top"
+      );
+      const fit = getFit(chest, bestSize.chest[0], bestSize.chest[1]);
+      if (matchPercent === 100) {
+        matchLabel = "Perfect Match";
+        matchClass = "match-green";
+      } else if (matchPercent > 95) {
+        matchLabel = "Within Range";
+        matchClass = "match-blue";
+      } else if (matchPercent > 90) {
+        matchLabel = "Near Range";
+        matchClass = "match-yellow";
+      } else {
+        matchLabel = "Beyond Range";
+        matchClass = "match-red";
+      }
+      const div = document.createElement("div");
+      div.className = "recom";
+      div.innerHTML = `
+    <div class="recom-details">
+      <p class="recom-heading">${selected.replace(/-/g, " ")}</p>
+      <p class="recom-size">Recommended Size <span>${bestSize.label
+        }</span> <span class="${matchClass}">
+  ${matchLabel} 
+</span>
+<img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info" class="tooltip-icon-individual"></p>
+      <div class="recom-pills-holder">
+        <div class="pill pill-grey ${matchClass}">
+          <img src="https://xsuniforms.com/wp-content/uploads/2025/12/round-tick-${matchClass}.png" alt="" />
+          <p>${matchPercent}%</p>
+          <p>match</p>
+        </div>
+      
+      </div>
+    </div>
+    <img src="https://xsuniforms.com/wp-content/uploads/2026/01/${selected.replace(/-/g, " ") === "hoodie" ||
+          selected.replace(/-/g, " ") === "jacket"
+          ? "hoodie"
+          : "top"
+        }
+.webp" class="recom-img" alt="" />
+  `;
+      containerTop.appendChild(div);
+    });
+
+    bottomInputs.forEach((el) => {
+      const selected = el.value;
+      const categoryKey = selected.includes("shorts")
+        ? "elastic-shorts"
+        : selected.includes("baseball")
+          ? "baseball-pants"
+          : "tracksuit-pants";
+      const categoryData = sizingData.bottoms[categoryKey];
+
+      const bestSize = findClosestSize(
+        categoryData,
+        waist,
+        height,
+        "waist",
+        "height"
+      );
+      const matchPercent = getCombinedMatchPercent(
+        { waist, height },
+        bestSize,
+        "bottom"
+      );
+      const fit = getFit(waist, bestSize.waist[0], bestSize.waist[1]);
+
+      let matchLabel = "";
+      let matchClass = "";
+
+      if (matchPercent === 100) {
+        matchLabel = "Perfect Match";
+        matchClass = "match-green";
+      } else if (matchPercent > 95) {
+        matchLabel = "Within Range";
+        matchClass = "match-blue";
+      } else if (matchPercent > 90) {
+        matchLabel = "Near Range";
+        matchClass = "match-yellow";
+      } else {
+        matchLabel = "Beyond Range";
+        matchClass = "match-red";
+      }
+
+      const div = document.createElement("div");
+      div.className = "recom";
+      div.innerHTML = `
+    <div class="recom-details">
+      <p class="recom-heading">${selected.replace(/-/g, " ")}</p>
+      <p class="recom-size">Recommended Size <span>${bestSize.label
+        }</span> <span class="${matchClass}">
+  ${matchLabel} 
+</span>
+<img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info" class="tooltip-icon-individual">
+</p>
+      <div class="recom-pills-holder">
+        <div class="pill pill-grey ${matchClass}">
+          <img src="https://xsuniforms.com/wp-content/uploads/2025/12/round-tick-${matchClass}.png" alt="" />
+          <p>${matchPercent}%</p>
+          <p>match</p>
+        </div>
+       
+      </div>
+    </div>
+    <img src="https://xsuniforms.com/wp-content/uploads/2026/01/shorts.webp" class="recom-img" alt="" />
+  `;
+      containerBottom.appendChild(div);
+    });
+  }
+
+  // -------------------- Event Listeners --------------------
+  document
+    .querySelectorAll(
+      'input[name="cut"], input[name="measurement"], input[type="number"], input[type="checkbox"]'
+    )
+    .forEach((el) => {
+      el.addEventListener("change", () => {
+        checkEnableIndividual();
+      });
+    });
+
+  calculateIndividual.addEventListener("click", () => {
+    if (!calculateIndividual.classList.contains("btn-disabled")) {
+      renderRecommendations();
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const inputIds = ["chest", "waist", "height"];
+
+    inputIds.forEach((id) => {
+      const input = document.getElementById(id);
+      if (!input) return;
+
+      input.addEventListener("input", () => {
+        const rawValue = input.value.trim();
+
+        const measureEl = document.querySelector(
+          `.measure[data-key="${id}"] .value`
+        );
+
+        if (!measureEl) return;
+
+        if (rawValue === "") {
+          measureEl.textContent = "-";
+          return;
+        }
+
+        const numericValue = parseFloat(rawValue);
+
+        if (isNaN(numericValue) || 0) {
+          measureEl.textContent = "-";
+          return;
+        }
+
+        measureEl.textContent = numericValue.toFixed(1);
+      });
+    });
+  });
+
+  /*-----------------------Logic for Team Sizing-----------------------*/
+  let uploadedCsvFiles = [];
+
+  const uploadsBlock = document.querySelector(".uploadsBlock");
+  const uploadBlock = document.getElementById("uploadBlock");
+  const uploadMainBlock = document.querySelector(".uploadBlock");
+  const totalUploaded = document.getElementById("totalUploaded");
+  const dropZone = document.querySelector(".uploadBox");
+
+  /* -----------------------------
+   FILE INPUT (CLICK UPLOAD)
+-------------------------------- */
+  fileInput?.addEventListener("change", () => {
+    handleFiles([...fileInput.files]);
+    fileInput.value = "";
+  });
+
+  /* -----------------------------
+   DRAG & DROP
+-------------------------------- */
+  dropZone?.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropZone.classList.add("drag-over");
+  });
+
+  dropZone?.addEventListener("dragleave", () => {
+    dropZone.classList.remove("drag-over");
+  });
+
+  dropZone?.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropZone.classList.remove("drag-over");
+    handleFiles([...e.dataTransfer.files]);
+  });
+
+  /* -----------------------------
+   CORE FILE HANDLER
+-------------------------------- */
+  function handleFiles(files) {
+    const csvFiles = files.filter((file) =>
+      file.name.toLowerCase().endsWith(".csv")
+    );
+    csvFiles.forEach((file) => {
+      uploadedCsvFiles.push(file);
+    });
+
+    if (!csvFiles.length) return;
+
+    uploadBlock.style.display = "block";
+
+    csvFiles.forEach((file) => addUploadedCsv(file));
+
+    updateTotalUploads();
+  }
+
+  /* -----------------------------
+   RENDER UPLOADED CSV
+-------------------------------- */
+  function addUploadedCsv(file) {
+    const sizeMB = (file.size / (1024 * 1024)).toFixed(1) + " MB";
+    const uploadedTime = "Just now";
+
+    const uploadedDiv = document.createElement("div");
+    uploadedDiv.className = "uploaded";
+
+    uploadedDiv.innerHTML = `
+    <div class="uploadedCsvDetails">
+      <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tick.webp" alt="Uploaded" />
+      <div>
+        <p class="heading">${file.name}</p>
+        <div class="csvDetails">
+          <p class="csvSize">${sizeMB}</p>
+          <div class="dot grey"></div>
+          <p class="csvSize">${uploadedTime}</p>
+          <div class="dot grey"></div>
+          <p class="csvSize noRows">Loading...</p>
+        </div>
+      </div>
+    </div>
+    <img src="https://xsuniforms.com/wp-content/uploads/2026/01/close.webp" class="close" alt="Remove" />
+  `;
+
+    const noRowsElement = uploadedDiv.querySelector(".noRows");
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const text = e.target.result;
+      const lines = text
+        .split(/\r?\n/)
+        .filter((line) => line.trim() !== "")
+        .slice(1); // discard first row
+      noRowsElement.textContent = `${lines.length} rows`;
+    };
+    reader.readAsText(file);
+
+    uploadedDiv.querySelector(".close").addEventListener("click", () => {
+      uploadedCsvFiles = uploadedCsvFiles.filter((f) => f !== file);
+      uploadedDiv.remove();
+      updateTotalUploads();
+    });
+
+    uploadsBlock.appendChild(uploadedDiv);
+  }
+
+  /* -----------------------------
+   UPDATE TOTAL UPLOAD COUNT
+-------------------------------- */
+  function updateTotalUploads() {
+    const count = uploadsBlock.querySelectorAll(".uploaded").length;
+    totalUploaded.textContent = count;
+
+    uploadBlock.style.display = count > 0 ? "block" : "none";
+
+    if (count > 0) {
+      toProcessingBtn.classList.add("btn-secondary");
+      toProcessingBtn.classList.remove("btn-disabled");
+    } else {
+      toProcessingBtn.classList.remove("btn-secondary");
+      toProcessingBtn.classList.add("btn-disabled");
+    }
+  }
+
+  /* -----------------------------
+TO PROCESSING BUTTON CLICK
+-------------------------------- */
+  const ERRORS_PER_PAGE = 5;
+  let errorRowsData = [];
+  let currentErrorPage = 1;
+  const REQUIRED_FIELDS = [
+    "Club/Organization Name",
+    "Male Cut or Female Cut",
+    "Player Chest Circumference",
+    "Player Waist Circumference",
+    "Player Height Head to Toe",
+    "Player Family Name",
+  ];
+
+  toProcessingBtn?.addEventListener("click", () => {
+    document.querySelectorAll(".measurementBulk").forEach((inp) => {
+      inp.innerText = document.querySelector(
+        'input[name="measurementTeam"]:checked'
+      )?.value;
+    });
+
+    if (!toProcessingBtn.classList.contains("btn-secondary")) return;
+
+    // ===== UI TRANSITION =====
+    uploadMainBlock.style.display = "none";
+    analyzingBlock.style.display = "flex";
+    teamAnalyze.style.display = "block";
+    individualAnalyze.style.display = "none";
+
+    startAnimation();
+
+    if (!uploadedCsvFiles.length) return;
+
+    // ===== RESET STATE =====
+    errorRowsData = [];
+    currentErrorPage = 1;
+
+    const fileDataMap = {};
+
+    // ===== READ CSV FILES =====
+    const fileReaders = uploadedCsvFiles.map((file) => {
+      return new Promise((resolve) => {
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          const text = e.target.result;
+          const lines = text.split(/\r?\n/).filter(Boolean);
+          if (lines.length <= 1) return resolve();
+
+          const headers = lines[0].split(",").map((h) => h.trim());
+
+          const rows = lines.slice(1).map((line) => {
+            const values = line.split(",");
+            const row = {};
+
+            headers.forEach((h, i) => {
+              row[h] = values[i]?.trim() || "";
+            });
+
+            const hasIssue = REQUIRED_FIELDS.some((f) => !row[f]);
+            if (hasIssue) errorRowsData.push(row);
+
+            return row;
+          });
+
+          fileDataMap[file.name] = rows;
+          resolve();
+        };
+
+        reader.readAsText(file);
+      });
+    });
+
+    // ===== AFTER ALL FILES READ =====
+    Promise.all(fileReaders).then(() => {
+      // Date
+      document.getElementById("processDate").textContent =
+        new Date().toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        });
+
+      const totalRowsAll = Object.values(fileDataMap).reduce(
+        (sum, arr) => sum + arr.length,
+        0
+      );
+
+      document.getElementById("noOfIssue").textContent = errorRowsData.length;
+      document.getElementById("totalRowsProcessed").textContent = totalRowsAll;
+      document.getElementById("totalRowsProcessedWithError").textContent =
+        errorRowsData.length;
+      document.getElementById("totalRowsProcessedSucessfully").textContent =
+        totalRowsAll - errorRowsData.length;
+
+      renderErrorPage(1);
+
+      // ===== ONLY RENDER TABLE IF NO ERRORS =====
+      if (errorRowsData.length !== 0) return;
+
+      const tbody = document.querySelector("#processedTable tbody");
+      const footer = document.getElementById("processedTableFooter");
+
+      const rowsPerPage = 5;
+      let currentPage = 1;
+      let currentFileRows = [];
+
+      function renderPage(page = 1) {
+        document.getElementById("totalIndividusalInCsv").textContent =
+          currentFileRows.length;
+        document.querySelector(
+          ".size-total"
+        ).textContent = `Total: ${currentFileRows.length} Items`;
+        currentFileRows.forEach((row) => {
+          let topSizes = [];
+          let bottomSizes = [];
+
+          if (sizingData) {
+            const genderInput =
+              row["Male Cut or Female Cut"] === "Male" ? "men" : "women";
+            const chest = parseFloat(row["Player Chest Circumference"]) || 0;
+            const waist = parseFloat(row["Player Waist Circumference"]) || 0;
+            const height = parseFloat(row["Player Height Head to Toe"]) || 0;
+
+            // Collect top sizes
+            const topInputs = [
+              ...document.querySelectorAll(
+                'input[name="short-sleeved"], input[name="long-sleeved"], input[name="hoodies"]'
+              ),
+            ];
+            topInputs.forEach((el) => {
+              const selected = el.value;
+              let categoryData = selected.includes("jacket")
+                ? sizingData.jackets[genderInput] ||
+                sizingData.jackets["youth-unisex"]
+                : selected.includes("hoodie")
+                  ? sizingData.hoodies[genderInput] ||
+                  sizingData.hoodies["youth-unisex"]
+                  : sizingData.tops[genderInput] ||
+                  sizingData.tops["youth-unisex"];
+
+              const bestSize = findClosestSize(
+                categoryData,
+                chest,
+                height,
+                "chest",
+                "height"
+              );
+              topSizes.push(bestSize.label);
+            });
+
+            // Collect bottom sizes
+            const bottomInputs = [
+              ...document.querySelectorAll(
+                'input[name="shorts"], input[name="pants"]'
+              ),
+            ];
+            bottomInputs.forEach((el) => {
+              const selected = el.value;
+              const categoryKey = selected.includes("shorts")
+                ? "elastic-shorts"
+                : selected.includes("baseball")
+                  ? "baseball-pants"
+                  : "tracksuit-pants";
+
+              const categoryData = sizingData.bottoms[categoryKey];
+              const bestSize = findClosestSize(
+                categoryData,
+                waist,
+                height,
+                "waist",
+                "height"
+              );
+              bottomSizes.push(bestSize.label);
+            });
+          }
+
+          // Helper to get mode
+          function mode(arr) {
+            if (!arr.length) return "-";
+            const freq = {};
+            let maxCount = 0;
+            let mostRepeated = arr[0];
+            arr.forEach((val) => {
+              freq[val] = (freq[val] || 0) + 1;
+              if (freq[val] > maxCount) {
+                maxCount = freq[val];
+                mostRepeated = val;
+              }
+            });
+            return mostRepeated;
+          }
+          // Store most repeated in row object
+          row.mostRepeatedTop = mode(topSizes);
+          row.mostRepeatedBottom = mode(bottomSizes);
+        });
+
+        const allTops = {};
+        const allBottoms = {};
+
+        // initialize keys
+        [
+          "YXS",
+          "YS",
+          "YM",
+          "YL",
+          "YXL",
+          "Y2XL",
+          "XS",
+          "S",
+          "M",
+          "L",
+          "XL",
+          "XXL",
+          "XXXL",
+        ].forEach((s) => {
+          allTops[s] = 0;
+          allBottoms[s] = 0;
+        });
+
+        // count totals
+        currentFileRows.forEach((row) => {
+          if (
+            row.mostRepeatedTop &&
+            allTops.hasOwnProperty(row.mostRepeatedTop)
+          )
+            allTops[row.mostRepeatedTop]++;
+          if (
+            row.mostRepeatedBottom &&
+            allBottoms.hasOwnProperty(row.mostRepeatedBottom)
+          )
+            allBottoms[row.mostRepeatedBottom]++;
+        });
+
+        // total items
+        const totalTopCount = currentFileRows.length;
+        const totalBottomCount = currentFileRows.length;
+
+        document.querySelectorAll(".size-bar .size-segment").forEach((div) => {
+          const cls = div.className
+            .split(" ")
+            .find((c) => c.startsWith("dot-"));
+          const sizeKey = cls.replace("dot-", "").toUpperCase();
+          const count = allTops[sizeKey] || 0; // default 0
+          if (count === 0) {
+            div.style.display = "none";
+          } else {
+            div.style.display = "flex";
+            div.style.width = (count / totalTopCount) * 100 + "%";
+          }
+        });
+
+        document.querySelectorAll(".size-container > div").forEach((div) => {
+          const dot = div.querySelector(".dot");
+          const sizeText = div.querySelector("p span:first-child").textContent;
+          const countSpan = div.querySelector("p span:last-child");
+          const count = allTops[sizeText] || 0;
+
+          if (count === 0) {
+            div.style.display = "none";
+          } else {
+            div.style.display = "flex";
+            countSpan.textContent = count;
+          }
+        });
+
+        currentPage = page;
+        tbody.innerHTML = "";
+
+        const start = (page - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const pageRows = currentFileRows.slice(start, end);
+
+        pageRows.forEach((row) => {
+          const tr = document.createElement("tr");
+          tr.setAttribute("club", row["Club/Organization Name"]);
+          tr.setAttribute("playerName", row["Player Family Name"]);
+          tr.setAttribute(
+            "cut",
+            row["Male Cut or Female Cut"] === "Male" ? "men" : "women"
+          );
+          tr.setAttribute("chest", row["Player Chest Circumference"]);
+          tr.setAttribute("waist", row["Player Waist Circumference"]);
+          tr.setAttribute("height", row["Player Height Head to Toe"]);
+
+          let topSizes = [];
+          let topAccuracies = [];
+          let bottomSizes = [];
+          let bottomAccuracies = [];
+
+          if (sizingData) {
+            const genderInput = tr.getAttribute("cut") || "male";
+            const chest = parseFloat(tr.getAttribute("chest")) || 0;
+            const waist = parseFloat(tr.getAttribute("waist")) || 0;
+            const height = parseFloat(tr.getAttribute("height")) || 0;
+
+            const topInputs = [
+              ...document.querySelectorAll(
+                'input[name="short-sleeved"], input[name="long-sleeved"], input[name="hoodies"]'
+              ),
+            ];
+
+            const bottomInputs = [
+              ...document.querySelectorAll(
+                'input[name="shorts"], input[name="pants"]'
+              ),
+            ];
+
+            // === TOPS ===
+            topInputs.forEach((el) => {
+              const selected = el.value;
+              let categoryData = selected.includes("jacket")
+                ? sizingData.jackets[genderInput] ||
+                sizingData.jackets["youth-unisex"]
+                : selected.includes("hoodie")
+                  ? sizingData.hoodies[genderInput] ||
+                  sizingData.hoodies["youth-unisex"]
+                  : sizingData.tops[genderInput] ||
+                  sizingData.tops["youth-unisex"];
+
+              const bestSize = findClosestSize(
+                categoryData,
+                chest,
+                height,
+                "chest",
+                "height"
+              );
+              topSizes.push(bestSize.label);
+
+              const matchPercent = getCombinedMatchPercent(
+                { chest, height },
+                bestSize,
+                selected.includes("hoodie") || selected.includes("jacket")
+                  ? "jacket"
+                  : "top"
+              );
+              topAccuracies.push(matchPercent);
+            });
+
+            // === BOTTOMS ===
+            bottomInputs.forEach((el) => {
+              const selected = el.value;
+              const categoryKey = selected.includes("shorts")
+                ? "elastic-shorts"
+                : selected.includes("baseball")
+                  ? "baseball-pants"
+                  : "tracksuit-pants";
+
+              const categoryData = sizingData.bottoms[categoryKey];
+              const bestSize = findClosestSize(
+                categoryData,
+                waist,
+                height,
+                "waist",
+                "height"
+              );
+              bottomSizes.push(bestSize.label);
+
+              const matchPercent = getCombinedMatchPercent(
+                { waist, height },
+                bestSize,
+                "bottom"
+              );
+              bottomAccuracies.push(matchPercent);
+            });
+          }
+
+          // === AVERAGES AND MOST REPEATED SIZE ===
+          function average(arr) {
+            if (!arr.length) return 0;
+            return arr.reduce((a, b) => a + b, 0) / arr.length;
+          }
+
+          function mode(arr) {
+            if (!arr.length) return "-";
+            const freq = {};
+            let maxCount = 0;
+            let mostRepeated = arr[0];
+
+            arr.forEach((val) => {
+              freq[val] = (freq[val] || 0) + 1;
+              if (freq[val] > maxCount) {
+                maxCount = freq[val];
+                mostRepeated = val;
+              }
+            });
+            return mostRepeated;
+          }
+
+          const avgTopAccuracy = Math.round(average(topAccuracies));
+          const avgBottomAccuracy = Math.round(average(bottomAccuracies));
+          const mostRepeatedTop = mode(topSizes);
+          const mostRepeatedBottom = mode(bottomSizes);
+          tr.setAttribute("top", mostRepeatedTop);
+          tr.setAttribute("bottom", mostRepeatedBottom);
+
+          // === FILL THE FOUR EMPTY TDs ===
+          tr.innerHTML = `
+  <td>${row["Club/Organization Name"] || "-"}</td>
+  <td>${row["Team Name or Age Group"] || "-"}</td>
+  <td>${row["Team Coach Name"] || "-"}</td>
+  <td>${row["Player Family Name"] || "-"}</td>
+  <td>${row["Player Jersey Number"] || "-"}</td>
+  <td>${row["Male Cut or Female Cut"] || "-"}</td>
+  <td>${row["Player Chest Circumference"] || "-"}</td>
+  <td>${row["Player Waist Circumference"] || "-"}</td>
+  <td>${row["Player Height Head to Toe"] || "-"}</td>
+  <td>${mostRepeatedTop}</td>
+  <td class="${avgTopAccuracy > 90
+              ? "match-green"
+              : avgBottomAccuracy > 80
+                ? "match-yellow"
+                : "match-red"
+            }">
+  <div class="pillFlex">
+  <div class="upPill"></div>
+  <span>${avgTopAccuracy > 90 ? "High" : avgTopAccuracy > 80 ? "Medium" : "Low"
+            }(${avgTopAccuracy}%)</span>
+</td>
+
+  <td>${mostRepeatedBottom}</td>
+<td class="${avgBottomAccuracy > 90
+              ? "match-green"
+              : avgBottomAccuracy > 80
+                ? "match-yellow"
+                : "match-red"
+            }">
+        <div class="pillFlex">
+
+  <div class="upPill"></div>
+  <span>${avgBottomAccuracy > 90 ? "High" : avgBottomAccuracy > 80 ? "Medium" : "Low"
+            } (${avgBottomAccuracy}%)</span>
+  </div>
+</td>
+
+  <td class="confidence high">
+    <button class="btn btn-special">Full Report</button>
+  </td>
+`;
+
+          tbody.appendChild(tr);
+
+          const reportBtn = tr.querySelector(".btn-special");
+          reportBtn.addEventListener("click", () => {
+            document.querySelector(".popUpdivOverlay").style.display = "block";
+
+            renderRecommendationsForRow({
+              cut: tr.getAttribute("cut"),
+              chest: tr.getAttribute("chest"),
+              waist: tr.getAttribute("waist"),
+              height: tr.getAttribute("height"),
+              playerName: tr.getAttribute("playerName"),
+              club: tr.getAttribute("club"),
+            });
+          });
+        });
+        const totalPages = Math.ceil(currentFileRows.length / rowsPerPage);
+        footer.querySelector("p").textContent = `Showing ${start + 1
+          }–${Math.min(end, currentFileRows.length)} of ${currentFileRows.length
+          } results`;
+
+        const pagination = footer.querySelector(".pagination");
+        pagination.innerHTML = "";
+
+        for (let i = 1; i <= totalPages; i++) {
+          const btn = document.createElement("button");
+          btn.className = "page-btn" + (i === page ? " active" : "");
+          btn.textContent = i;
+          btn.onclick = () => renderPage(i);
+          pagination.appendChild(btn);
+        }
+      }
+
+      // ===== FILE TABS =====
+      const tabs = document.querySelector(".file-tabs");
+      tabs.innerHTML = "";
+
+      uploadedCsvFiles.forEach((file, idx) => {
+        const tab = document.createElement("div");
+        tab.className = "file-tab" + (idx === 0 ? " active" : "");
+        tab.textContent = file.name;
+
+        tab.onclick = () => {
+          document
+            .querySelectorAll(".file-tab")
+            .forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+
+          currentFileRows = fileDataMap[file.name] || [];
+          renderPage(1);
+        };
+
+        tabs.appendChild(tab);
+
+        if (idx === 0) {
+          currentFileRows = fileDataMap[file.name] || [];
+          renderPage(1);
+        }
+        // === SIZE BAR & SIZE CONTAINER RENDERING ===
+        function renderSizes(type = "top") {
+          const allCounts = {};
+          const sizes = [
+            "YXS",
+            "YS",
+            "YM",
+            "YL",
+            "YXL",
+            "Y2XL",
+            "XS",
+            "S",
+            "M",
+            "L",
+            "XL",
+            "XXL",
+            "XXXL",
+          ];
+
+          // Initialize counts
+          sizes.forEach((s) => (allCounts[s] = 0));
+
+          // Count totals based on type
+          currentFileRows.forEach((row) => {
+            const size =
+              type === "top" ? row.mostRepeatedTop : row.mostRepeatedBottom;
+            if (size && allCounts.hasOwnProperty(size)) allCounts[size]++;
+          });
+
+          const totalCount = currentFileRows.length;
+
+          document
+            .querySelectorAll(".size-bar .size-segment")
+            .forEach((div) => {
+              const cls = div.className
+                .split(" ")
+                .find((c) => c.startsWith("dot-"));
+              const sizeKey = cls.replace("dot-", "").toUpperCase();
+              const count = allCounts[sizeKey] || 0;
+
+              if (count === 0) div.style.display = "none";
+              else {
+                div.style.display = "flex";
+                div.style.width = (count / totalCount) * 100 + "%";
+              }
+            });
+
+          document.querySelectorAll(".size-container > div").forEach((div) => {
+            const sizeText =
+              div.querySelector("p span:first-child").textContent;
+            const countSpan = div.querySelector("p span:last-child");
+            const count = allCounts[sizeText] || 0;
+
+            if (count === 0) div.style.display = "none";
+            else {
+              div.style.display = "flex";
+              countSpan.textContent = count;
+            }
+          });
+        }
+
+        renderSizes("top");
+
+        document
+          .getElementById("sizeCategory")
+          .addEventListener("change", (e) => {
+            renderSizes(e.target.value);
+          });
+      });
+    });
+  });
+
+  function renderErrorPage(page) {
+    const tbody = document.querySelector("#errorTable tbody");
+    tbody.innerHTML = "";
+
+    currentErrorPage = page;
+
+    const start = (page - 1) * ERRORS_PER_PAGE;
+    const end = Math.min(start + ERRORS_PER_PAGE, errorRowsData.length);
+
+    errorRowsData.slice(start, end).forEach((row) => {
+      const tr = document.createElement("tr");
+      tr.className = "errorRow";
+
+      tr.innerHTML = `
+      <td>${row["Club/Organization Name"] || "-"}</td>
+      <td>${row["Team Name or Age Group"] || "-"}</td>
+      <td>${row["Team Coach Name"] || "-"}</td>
+      <td>${row["Player Family Name"] || "-"}</td>
+      <td>${row["Player Jersey Number"] || "-"}</td>
+      <td>${row["Male Cut or Female Cut"] || "-"}</td>
+      <td>${row["Player Chest Circumference"]}</td>
+      <td>${row["Player Waist Circumference"]}</td>
+      <td>${row["Player Height Head to Toe"]}</td>
+    `;
+
+      tbody.appendChild(tr);
+    });
+
+    updateErrorFooter(start + 1, end, errorRowsData.length);
+    renderPagination();
+  }
+  function updateErrorFooter(start, end, total) {
+    const footer = document.querySelector("#errorFooter p");
+
+    if (!total) {
+      footer.textContent = "No errors found";
+    } else {
+      footer.textContent = `Showing ${start}–${end} of ${total} results`;
+    }
+  }
+  function renderPagination() {
+    const pagination = document.querySelector("#errorFooter .pagination");
+    pagination.innerHTML = "";
+
+    const totalPages = Math.ceil(errorRowsData.length / ERRORS_PER_PAGE);
+    if (totalPages <= 1) return; // no pagination needed
+
+    const current = currentErrorPage;
+
+    const createButton = (text, page = null, isActive = false) => {
+      const btn = document.createElement("button");
+      btn.className = "page-btn";
+      if (isActive) btn.classList.add("active");
+      btn.textContent = text;
+
+      if (page) {
+        btn.addEventListener("click", () => renderErrorPage(page));
+      }
+
+      return btn;
+    };
+
+    // Previous button
+    const prev = createButton("<", current > 1 ? current - 1 : 1);
+    prev.disabled = current === 1;
+    pagination.appendChild(prev);
+
+    pagination.appendChild(createButton("1", 1, current === 1));
+
+    if (current > 4) {
+      const ellipsis = document.createElement("span");
+      ellipsis.textContent = "...";
+      ellipsis.className = "ellipsis";
+      pagination.appendChild(ellipsis);
+    }
+
+    // Middle pages
+    for (
+      let i = Math.max(2, current - 2);
+      i <= Math.min(totalPages - 1, current + 2);
+      i++
+    ) {
+      pagination.appendChild(createButton(i, i, current === i));
+    }
+
+    // Right ellipsis if needed
+    if (current < totalPages - 3) {
+      const ellipsis = document.createElement("span");
+      ellipsis.textContent = "...";
+      ellipsis.className = "ellipsis";
+      pagination.appendChild(ellipsis);
+    }
+
+    // Last page
+    if (totalPages > 1) {
+      pagination.appendChild(
+        createButton(totalPages, totalPages, current === totalPages)
+      );
+    }
+
+    // Next button
+    const next = createButton(
+      ">",
+      current < totalPages ? current + 1 : totalPages
+    );
+    next.disabled = current === totalPages; // disable if on last page
+    pagination.appendChild(next);
+  }
+
+  const reuploadCSV = document.getElementById("reuploadCSV");
+  const recalculateCsvAfterCompletion = document.getElementById(
+    "recalculateCsvAfterCompletion"
+  );
+
+  reuploadCSV.addEventListener("click", () => {
+    calculatingTeams.style.display = "none";
+    uploadMainBlock.style.display = "block";
+  });
+
+  recalculateCsvAfterCompletion.addEventListener("click", () => {
+    teamResult.style.display = "none";
+    uploadMainBlock.style.display = "block";
+  });
+
+  function renderRecommendationsForRow(row) {
+    if (!sizingData) return;
+
+    const genderInput = row.cut?.toLowerCase() || "male";
+    const measurementUnit =
+      document.querySelector('input[name="measurementTeam"]:checked')?.value ||
+      "cm";
+
+    // Convert all required measurements
+    const chest = convertToCM(parseFloat(row.chest), measurementUnit);
+    const waist = convertToCM(parseFloat(row.waist), measurementUnit);
+    const height = convertToCM(parseFloat(row.height), measurementUnit);
+    playerName.innerText = row.playerName;
+    clubName.innerText = row.club;
+    // Select all top and bottom options from your HTML
+    const topInputs = [
+      ...document.querySelectorAll(
+        'input[name="short-sleeved"], input[name="long-sleeved"], input[name="hoodies"]'
+      ),
+    ];
+    const bottomInputs = [
+      ...document.querySelectorAll('input[name="shorts"], input[name="pants"]'),
+    ];
+
+    // Clear previous results
+    containerTopBulk.innerHTML = "";
+    containerBottomBulk.innerHTML = "";
+
+    // === Render Tops ===
+    topInputs.forEach((el) => {
+      const selected = el.value;
+
+      // Determine category data
+      let categoryData = selected.includes("jacket")
+        ? sizingData.jackets[genderInput] || sizingData.jackets["youth-unisex"]
+        : selected.includes("hoodie")
+          ? sizingData.hoodies[genderInput] || sizingData.hoodies["youth-unisex"]
+          : sizingData.tops[genderInput] || sizingData.tops["youth-unisex"];
+
+      const bestSize = findClosestSize(
+        categoryData,
+        chest,
+        height,
+        "chest",
+        "height"
+      );
+      const matchPercent = getCombinedMatchPercent(
+        { chest, height },
+        bestSize,
+        selected.includes("hoodie") || selected.includes("jacket")
+          ? "jacket"
+          : "top"
+      );
+
+      let matchLabel = "";
+      let matchClass = "";
+      if (matchPercent === 100) {
+        matchLabel = "Perfect Match";
+        matchClass = "match-green";
+      } else if (matchPercent > 95) {
+        matchLabel = "Within Range";
+        matchClass = "match-blue";
+      } else if (matchPercent > 90) {
+        matchLabel = "Near Range";
+        matchClass = "match-yellow";
+      } else {
+        matchLabel = "Beyond Range";
+        matchClass = "match-red";
+      }
+
+      const div = document.createElement("div");
+      div.className = "recom";
+      div.innerHTML = `
+      <div class="recom-details">
+        <p class="recom-heading">${selected.replace(/-/g, " ")}</p>
+        <p class="recom-size">Recommended Size <span>${bestSize.label}</span> 
+          <span class="${matchClass}">${matchLabel}</span>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info" class="tooltip-icon-individual">
+        </p>
+        <div class="recom-pills-holder">
+          <div class="pill pill-grey ${matchClass}">
+            <img src="https://xsuniforms.com/wp-content/uploads/2025/12/round-tick-${matchClass}.png" alt="" />
+            <p>${matchPercent}%</p>
+            <p>match</p>
+          </div>
+        </div>
+      </div>
+      <img src="https://xsuniforms.com/wp-content/uploads/2026/01/${selected.includes("hoodie") || selected.includes("jacket")
+          ? "hoodie"
+          : "top"
+        }.webp" class="recom-img" alt="" />
+    `;
+      containerTopBulk.appendChild(div);
+    });
+
+    bottomInputs.forEach((el) => {
+      const selected = el.value;
+
+      const categoryKey = selected.includes("shorts")
+        ? "elastic-shorts"
+        : selected.includes("baseball")
+          ? "baseball-pants"
+          : "tracksuit-pants";
+
+      const categoryData = sizingData.bottoms[categoryKey];
+      const bestSize = findClosestSize(
+        categoryData,
+        waist,
+        height,
+        "waist",
+        "height"
+      );
+      const matchPercent = getCombinedMatchPercent(
+        { waist, height },
+        bestSize,
+        "bottom"
+      );
+
+      let matchLabel = "";
+      let matchClass = "";
+      if (matchPercent === 100) {
+        matchLabel = "Perfect Match";
+        matchClass = "match-green";
+      } else if (matchPercent > 95) {
+        matchLabel = "Within Range";
+        matchClass = "match-blue";
+      } else if (matchPercent > 90) {
+        matchLabel = "Near Range";
+        matchClass = "match-yellow";
+      } else {
+        matchLabel = "Beyond Range";
+        matchClass = "match-red";
+      }
+
+      const div = document.createElement("div");
+      div.className = "recom";
+      div.innerHTML = `
+      <div class="recom-details">
+        <p class="recom-heading">${selected.replace(/-/g, " ")}</p>
+        <p class="recom-size">Recommended Size <span>${bestSize.label}</span>
+          <span class="${matchClass}">${matchLabel}</span>
+          <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info" class="tooltip-icon-individual">
+        </p>
+        <div class="recom-pills-holder">
+          <div class="pill pill-grey ${matchClass}">
+            <img src="https://xsuniforms.com/wp-content/uploads/2025/12/round-tick-${matchClass}.png" alt="" />
+            <p>${matchPercent}%</p>
+            <p>match</p>
+          </div>
+        </div>
+      </div>
+      <img src="https://xsuniforms.com/wp-content/uploads/2026/01/shorts.webp" class="recom-img" alt="" />
+    `;
+      containerBottomBulk.appendChild(div);
+    });
+  }
+
+  document.getElementById("closePopUp").addEventListener("click", () => {
+    popUpdivOverlay.style.display = "none";
+  });
+
+  const tooltipIcon = document.querySelectorAll(".tooltip-icon");
+
+  const tooltip = document.createElement("div");
+  tooltip.className = "tooltip-js";
+  document.body.appendChild(tooltip);
+
+  tooltipIcon.forEach((tool) =>
+    tool.addEventListener("mouseenter", (e) => {
+      tooltip.textContent = e.target.dataset.tooltip; // get tooltip text from data attribute
+      tooltip.style.opacity = 1;
+    })
+  );
+
+  tooltipIcon.forEach((tool) =>
+    tool.addEventListener("mousemove", (e) => {
+      tooltip.style.top = e.pageY + 15 + "px"; // 15px below cursor
+      tooltip.style.left = e.pageX + 15 + "px";
+    })
+  );
+
+  tooltipIcon.forEach((tool) =>
+    tool.addEventListener("mouseleave", () => {
+      tooltip.style.opacity = 0;
+    })
+  );
+
+  const tooltipIconIndividual = document.querySelectorAll(
+    ".tooltip-icon-individual"
+  );
+  const tooltipHTML = `
+  <h4 class="match-green">Perfect Match</h4>
+  <p>→Measurements sit comfortably within range</p>
+
+  <h4 class="match-blue">Within Range</h4>
+  <p>→Measurements sit at the edges of the range</p>
+
+  <h4 class="match-yellow">Near Range (or Closest Available Fit)</h4>
+  <p>
+    →Measurements slightly outside the range with 0.5–1 inch difference,
+    closest fit suggested
+  </p>
+
+  <h4 class="match-red">Beyond Range</h4>
+  <p>
+    →Measurements contradict each other or fall into an exception case
+    (e.g., waist suggests Size M but height/torso pushes to XXL)
+  </p>
+`;
+
+  document.addEventListener(
+    "mouseenter",
+    (e) => {
+      const tool = e.target.closest(".tooltip-icon-individual");
+      if (!tool) return;
+
+      tooltip.innerHTML = tooltipHTML;
+      tooltip.style.opacity = 1;
+    },
+    true
+  );
+  document.addEventListener(
+    "mouseleave",
+    (e) => {
+      const tool = e.target.closest(".tooltip-icon-individual");
+      if (!tool) return;
+
+      tooltip.style.opacity = 0;
+    },
+    true
+  );
+
+  document.addEventListener("mousemove", (e) => {
+    const tool = e.target.closest(".tooltip-icon-individual");
+    if (!tool) return;
+
+    tooltip.style.top = `${e.pageY + 15}px`;
+    tooltip.style.left = `${e.pageX + 15}px`;
+  });
+</script>
