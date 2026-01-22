@@ -1756,7 +1756,7 @@
 
   .measurements-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     background: #0b1020;
     border-radius: 14px;
     overflow: hidden;
@@ -2449,6 +2449,10 @@
               <label>Torso Length</label>
               <input type="number" placeholder="e.g., 70" id="height" />
             </div>
+            <div class="input-holder">
+              <label>Leg Length</label>
+              <input type="number" placeholder="e.g., 100" id="leg" />
+            </div>
           </div>
           <div class="section help-block">
             <div class="help-initial">
@@ -2644,6 +2648,11 @@
 
             <div class="measure" data-key="height">
               <span class="label">HEIGHT</span>
+              <span class="value">0.0</span>
+            </div>
+
+            <div class="measure" data-key="leg">
+              <span class="label">LEG</span>
               <span class="value">0.0</span>
             </div>
           </div>
@@ -3251,7 +3260,7 @@
 
   // Radio and input groups
   const individualRadioGroups = ["tops", "cut", "measurement"];
-  const individualInputs = ["chest", "waist", "height"];
+  const individualInputs = ["chest", "waist", "height", "leg"];
 
   // Function to update tab content
   function updateContent() {
@@ -3285,7 +3294,7 @@
       'input[name="measurement"]:checked'
     );
 
-    const requiredInputs = ["chest", "waist", "height"];
+    const requiredInputs = ["chest", "waist", "height", "leg"];
     const inputsFilled = requiredInputs.every((id) => {
       const el = document.getElementById(id);
       return el && el.value.trim() !== "";
@@ -4936,114 +4945,125 @@
       parseFloat(document.getElementById("waist").value),
       measurementUnit
     );
-    const height = convertToCM(
-      parseFloat(document.getElementById("height").value),
-      measurementUnit
-    );
-
-    const topInputs = [
-      ...document.querySelectorAll(
-        'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
-      ),
-    ];
-    const bottomInputs = [
-      ...document.querySelectorAll(
-        'input[name="shorts"]:checked, input[name="pants"]:checked'
-      ),
-    ];
-
-    containerTop.innerHTML = "";
-    containerBottom.innerHTML = "";
-
-    // Render Tops / Jackets
-    topInputs.forEach((el) => {
-      const selected = el.value;
-
-      let categoryData = selected.includes("jacket")
-        ? sizingData.jackets[genderInput] || sizingData.jackets["youth-unisex"]
-        : selected.includes("hoodie")
-          ? sizingData.hoodies[genderInput] || sizingData.hoodies["youth-unisex"]
-          : sizingData.tops[genderInput] || sizingData.tops["youth-unisex"];
-
-      const bestSize = findClosestSize(
-        categoryData,
-        chest,
-        height,
-        "chest",
-        "height"
-      );
-      const matchPercent = getCombinedMatchPercent(
-        { chest, height },
-        bestSize,
-        selected.includes("hoodie") || selected.includes("jacket")
-          ? "jacket"
-          : "top"
-      );
-      const fit = getFit(chest, bestSize.chest[0], bestSize.chest[1]);
-      if (matchPercent === 100) {
-        matchLabel = "Perfect Match";
-        matchClass = "match-green";
-      } else if (matchPercent > 95) {
-        matchLabel = "Within Range";
-        matchClass = "match-blue";
-      } else if (matchPercent > 90) {
-        matchLabel = "Near Range";
-        matchClass = "match-yellow";
-      } else {
-        matchLabel = "Beyond Range";
-        matchClass = "match-red";
-      }
-      const div = document.createElement("div");
-      div.className = "recom";
-      div.innerHTML = `
-    <div class="recom-details">
-      <p class="recom-heading">${selected.replace(/-/g, " ")}</p>
-      <p class="recom-size">Recommended Size <span>${bestSize.label
-        }</span> <span class="${matchClass}">
-  ${matchLabel} 
-</span>
-<img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info" class="tooltip-icon-individual"></p>
-      <div class="recom-pills-holder">
-        <div class="pill pill-grey ${matchClass}">
-          <img src="https://xsuniforms.com/wp-content/uploads/2025/12/round-tick-${matchClass}.png" alt="" />
-          <p>${matchPercent}%</p>
-          <p>match</p>
+        const height = convertToCM(
+          parseFloat(document.getElementById("height").value),
+          measurementUnit
+        );
+        const leg = convertToCM(
+          parseFloat(document.getElementById("leg").value),
+          measurementUnit
+        );
+    
+        const topInputs = [
+          ...document.querySelectorAll(
+            'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
+          ),
+        ];
+        const bottomInputs = [
+          ...document.querySelectorAll(
+            'input[name="shorts"]:checked, input[name="pants"]:checked'
+          ),
+        ];
+    
+        containerTop.innerHTML = "";
+        containerBottom.innerHTML = "";
+    
+        // Render Tops / Jackets
+        topInputs.forEach((el) => {
+          const selected = el.value;
+    
+          let categoryData = selected.includes("jacket")
+            ? sizingData.jackets[genderInput] || sizingData.jackets["youth-unisex"]
+            : selected.includes("hoodie")
+            ? sizingData.hoodies[genderInput] || sizingData.hoodies["youth-unisex"]
+            : sizingData.tops[genderInput] || sizingData.tops["youth-unisex"];
+    
+          const bestSize = findClosestSize(
+            categoryData,
+            chest,
+            height,
+            "chest",
+            "height"
+          );
+          const matchPercent = getCombinedMatchPercent(
+            { chest, height },
+            bestSize,
+            selected.includes("hoodie") || selected.includes("jacket")
+              ? "jacket"
+              : "top"
+          );
+          const fit = getFit(chest, bestSize.chest[0], bestSize.chest[1]);
+          if (matchPercent === 100) {
+            matchLabel = "Perfect Match";
+            matchClass = "match-green";
+          } else if (matchPercent > 95) {
+            matchLabel = "Within Range";
+            matchClass = "match-blue";
+          } else if (matchPercent > 90) {
+            matchLabel = "Near Range";
+            matchClass = "match-yellow";
+          } else {
+            matchLabel = "Beyond Range";
+            matchClass = "match-red";
+          }
+          const div = document.createElement("div");
+          div.className = "recom";
+          div.innerHTML = `
+        <div class="recom-details">
+          <p class="recom-heading">${selected.replace(/-/g, " ")}</p>
+          <p class="recom-size">Recommended Size <span>${
+            bestSize.label
+          }</span> <span class="${matchClass}">
+      ${matchLabel} 
+    </span>
+    <img src="https://xsuniforms.com/wp-content/uploads/2026/01/tooltip.webp" alt="Info" class="tooltip-icon-individual"></p>
+          <div class="recom-pills-holder">
+            <div class="pill pill-grey ${matchClass}">
+              <img src="https://xsuniforms.com/wp-content/uploads/2025/12/round-tick-${matchClass}.png" alt="" />
+              <p>${matchPercent}%</p>
+              <p>match</p>
+            </div>
+          
+          </div>
         </div>
-      
-      </div>
-    </div>
-    <img src="https://xsuniforms.com/wp-content/uploads/2026/01/${selected.replace(/-/g, " ") === "hoodie" ||
+        <img src="https://xsuniforms.com/wp-content/uploads/2026/01/${
+          selected.replace(/-/g, " ") === "hoodie" ||
           selected.replace(/-/g, " ") === "jacket"
-          ? "hoodie"
-          : "top"
+            ? "hoodie"
+            : "top"
         }
-.webp" class="recom-img" alt="" />
-  `;
-      containerTop.appendChild(div);
-    });
-
-    bottomInputs.forEach((el) => {
-      const selected = el.value;
-      const categoryKey = selected.includes("shorts")
-        ? "elastic-shorts"
-        : selected.includes("baseball")
-          ? "baseball-pants"
-          : "tracksuit-pants";
-      const categoryData = sizingData.bottoms[categoryKey];
-
-      const bestSize = findClosestSize(
-        categoryData,
-        waist,
-        height,
-        "waist",
-        "height"
-      );
-      const matchPercent = getCombinedMatchPercent(
-        { waist, height },
-        bestSize,
-        "bottom"
-      );
-      const fit = getFit(waist, bestSize.waist[0], bestSize.waist[1]);
+    .webp" class="recom-img" alt="" />
+      `;
+          containerTop.appendChild(div);
+        });
+    
+        bottomInputs.forEach((el) => {
+          const selected = el.value;
+          const categoryKey = selected.includes("shorts")
+            ? "elastic-shorts"
+            : selected.includes("baseball")
+            ? "baseball-pants"
+            : "tracksuit-pants";
+          const categoryData = sizingData.bottoms[categoryKey];
+    
+          // Use 'leg' for pants, 'height' (dummy) for shorts
+          const isPants = selected.includes("pants");
+          const secondaryVal = isPants ? leg : height;
+          const secondaryKey = isPants ? "leg" : "height";
+    
+          const bestSize = findClosestSize(
+            categoryData,
+            waist,
+            secondaryVal,
+            "waist",
+            secondaryKey
+          );
+          const matchPercent = getCombinedMatchPercent(
+            { waist, height: secondaryVal },
+            bestSize,
+            "bottom"
+          );
+          const fit = getFit(waist, bestSize.waist[0], bestSize.waist[1]);
 
       let matchLabel = "";
       let matchClass = "";
@@ -5106,7 +5126,7 @@
   });
 
   document.addEventListener("DOMContentLoaded", () => {
-    const inputIds = ["chest", "waist", "height"];
+    const inputIds = ["chest", "waist", "height", "leg"];
 
     inputIds.forEach((id) => {
       const input = document.getElementById(id);
