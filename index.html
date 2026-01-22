@@ -4973,10 +4973,10 @@
           const selected = el.value;
     
           let categoryData = selected.includes("jacket")
-            ? sizingData.jackets[genderInput] || sizingData.jackets["youth-unisex"]
+            ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
             : selected.includes("hoodie")
-            ? sizingData.hoodies[genderInput] || sizingData.hoodies["youth-unisex"]
-            : sizingData.tops[genderInput] || sizingData.tops["youth-unisex"];
+            ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
+            : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
     
           const bestSize = findClosestSize(
             categoryData,
@@ -5414,13 +5414,10 @@ TO PROCESSING BUTTON CLICK
             topInputs.forEach((el) => {
               const selected = el.value;
               let categoryData = selected.includes("jacket")
-                ? sizingData.jackets[genderInput] ||
-                sizingData.jackets["youth-unisex"]
+                ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
                 : selected.includes("hoodie")
-                  ? sizingData.hoodies[genderInput] ||
-                  sizingData.hoodies["youth-unisex"]
-                  : sizingData.tops[genderInput] ||
-                  sizingData.tops["youth-unisex"];
+                  ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
+                  : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
 
               const bestSize = findClosestSize(
                 categoryData,
@@ -5593,13 +5590,10 @@ TO PROCESSING BUTTON CLICK
             topInputs.forEach((el) => {
               const selected = el.value;
               let categoryData = selected.includes("jacket")
-                ? sizingData.jackets[genderInput] ||
-                sizingData.jackets["youth-unisex"]
+                ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
                 : selected.includes("hoodie")
-                  ? sizingData.hoodies[genderInput] ||
-                  sizingData.hoodies["youth-unisex"]
-                  : sizingData.tops[genderInput] ||
-                  sizingData.tops["youth-unisex"];
+                  ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
+                  : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
 
               const bestSize = findClosestSize(
                 categoryData,
@@ -6009,10 +6003,10 @@ TO PROCESSING BUTTON CLICK
 
       // Determine category data
       let categoryData = selected.includes("jacket")
-        ? sizingData.jackets[genderInput] || sizingData.jackets["youth-unisex"]
+        ? [...(sizingData.jackets["youth-unisex"] || []), ...(sizingData.jackets[genderInput] || [])]
         : selected.includes("hoodie")
-          ? sizingData.hoodies[genderInput] || sizingData.hoodies["youth-unisex"]
-          : sizingData.tops[genderInput] || sizingData.tops["youth-unisex"];
+          ? [...(sizingData.hoodies["youth-unisex"] || []), ...(sizingData.hoodies[genderInput] || [])]
+          : [...(sizingData.tops["youth-unisex"] || []), ...(sizingData.tops[genderInput] || [])];
 
       const bestSize = findClosestSize(
         categoryData,
