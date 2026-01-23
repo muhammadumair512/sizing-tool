@@ -232,7 +232,8 @@
   }
 
   .radio-card .cut-content {
-    width: 194.671875px;
+    flex: 1;
+    min-width: 120px;
     height: 50px;
     border-radius: 10px;
     padding: 0;
@@ -2416,6 +2417,11 @@
             <input type="radio" name="cut" value="women" />
             <div class="card-content cut-content">Female</div>
           </label>
+
+          <label class="radio-card">
+            <input type="radio" name="cut" value="youth-unisex" />
+            <div class="card-content cut-content">Youth</div>
+          </label>
         </div>
       </div>
       <div class="section">
@@ -2423,9 +2429,9 @@
           <h3 class="heading heading-small heading-star">Body Measurements</h3>
           <img src="https://xsuniforms.com/wp-content/uploads/2026/01/arrow.webp" alt="" />
         </div>
-        <p class="para measurement-para">Enter your body measurements</p>
+        <p class="para measurement-para">Enter your body measurements (in cm only)</p>
         <div class="mesurement-section">
-          <div class="radio-group measurement-group">
+          <div class="radio-group measurement-group" style="display: none;">
             <!-- <label class="radio-card">
               <input type="radio" name="measurement" value="inches" selected />
               <div class="card-content measurement-content">Inches</div>
@@ -2486,12 +2492,7 @@
           </h3>
           <div class="radio-group measurement-group">
             <label class="radio-card">
-              <input type="radio" name="measurementTeam" value="inches" selected />
-              <div class="card-content measurement-content">Inches</div>
-            </label>
-
-            <label class="radio-card">
-              <input type="radio" name="measurementTeam" value="cm" />
+              <input type="radio" name="measurementTeam" value="cm" checked />
               <div class="card-content measurement-content">CM</div>
             </label>
           </div>
@@ -2647,7 +2648,7 @@
             </div>
 
             <div class="measure" data-key="height">
-              <span class="label">HEIGHT</span>
+              <span class="label">TORSO</span>
               <span class="value">0.0</span>
             </div>
 
@@ -3161,6 +3162,9 @@
   </div>
 </div>
 <script>
+  // -------------------- Global Data --------------------
+  let sizingData = {};
+  
   /*----------------------Selectors*------------------------*/
   const calculatingTeams = document.querySelector(".calculatingTeams");
   const teamResult = document.querySelector(".teamResult");
@@ -3280,6 +3284,10 @@
   }
 
   function checkEnableIndividual() {
+    const dataLoaded = Object.keys(sizingData).length > 0;
+    const genderSelected = document.querySelector('input[name="cut"]:checked') !== null;
+    const measurementSelected = document.querySelector('input[name="measurement"]:checked') !== null;
+    
     const topGroups = ["short-sleeved", "long-sleeved", "hoodies"];
     const topSelected = topGroups.some((group) =>
       document.querySelector(`input[name="${group}"]:checked`)
@@ -3290,17 +3298,13 @@
       document.querySelector(`input[name="${group}"]:checked`)
     );
 
-    const measurementSelected = !!document.querySelector(
-      'input[name="measurement"]:checked'
-    );
-
     const requiredInputs = ["chest", "waist", "height", "leg"];
     const inputsFilled = requiredInputs.every((id) => {
       const el = document.getElementById(id);
       return el && el.value.trim() !== "";
     });
 
-    if (topSelected && bottomSelected && measurementSelected && inputsFilled) {
+    if (dataLoaded && genderSelected && topSelected && bottomSelected && measurementSelected && inputsFilled) {
       calculateIndividual.classList.add("btn-secondary");
       calculateIndividual.classList.remove("btn-disabled");
     } else {
@@ -3344,11 +3348,15 @@
   function clearIndividual() {
     document
       .querySelectorAll(
-        'input[name="cut"], input[name="measurement"], input[name="short-sleeved"], input[name="long-sleeved"], input[name="hoodies"], input[name="shorts"], input[name="pants"]'
+        'input[name="cut"], input[name="short-sleeved"], input[name="long-sleeved"], input[name="hoodies"], input[name="shorts"], input[name="pants"]'
       )
       .forEach((el) => {
         if (el.type === "checkbox" || el.type === "radio") el.checked = false;
       });
+
+    // Ensure CM is always checked
+    const cmInput = document.querySelector('input[name="measurement"][value="cm"]');
+    if (cmInput) cmInput.checked = true;
 
     document.querySelectorAll('input[type="number"]').forEach((el) => {
       el.value = "";
@@ -3371,8 +3379,11 @@
     uploadBlock.style.display = "none";
     totalUploaded.textContent = "0";
 
+    // Ensure CM is always checked
     const radios = document.querySelectorAll('input[name="measurementTeam"]');
-    radios.forEach((radio) => (radio.checked = false));
+    radios.forEach((radio) => {
+      if (radio.value === 'cm') radio.checked = true;
+    });
   }
 
   individualRadioGroups.forEach((name) => {
@@ -3499,7 +3510,12 @@
       "chest-measurement-stat"
     );
     const cutTypeEl = document.getElementById("cut-type");
-    genderIndl.innerText = selectedCut.value;
+    
+    // Display friendly name for cut type
+    const cutDisplayName = selectedCut.value === "youth-unisex" ? "Youth" : 
+                           selectedCut.value === "men" ? "Male" : 
+                           selectedCut.value === "women" ? "Female" : selectedCut.value;
+    genderIndl.innerText = cutDisplayName;
 
     if (chestInput) {
       const chestValue = chestInput.value;
@@ -3596,12 +3612,14 @@
     });
   });
 
-  // -------------------- Globals --------------------
-  let sizingData = {};
+  // -------------------- Load Sizing Data --------------------
   fetch("./data.json")
     .then((res) => res.json())
     .then((data) => {
       sizingData = data;
+      console.log("Sizing data loaded:", Object.keys(data).length, "products");
+      // Re-check enable status now that data is loaded
+      checkEnableIndividual();
     })
     .catch((err) => console.error("Error loading sizing data:", err));
 
@@ -3636,22 +3654,24 @@
     typeKeyPrimary,
     typeKeySecondary
   ) {
-    const unit = "cm";
-      // document.querySelector('input[name="measurementTeam"]:checked')?.value ||
-      // "cm";
+    // Handle empty category data
+    if (!categoryData || categoryData.length === 0) {
+      return null;
+    }
 
+    const unit = "cm";
     const toCm = (val) => (unit === "inches" ? val * 2.54 : val);
 
     const chestCm = toCm(chestValue);
     const heightCm = toCm(heightValue);
 
-    // Step 1: Filter sizes where chest >= user chest (hard constraint)
+    // Step 1: Filter sizes where primary measurement <= max (hard constraint)
     const chestFits = categoryData.filter(
       (size) => chestCm <= size[typeKeyPrimary][1]
     );
 
     if (chestFits.length === 0) {
-      // Chest larger than all → pick largest
+      // Measurement larger than all → pick largest size
       return categoryData[categoryData.length - 1];
     }
 
@@ -3674,11 +3694,14 @@
       }
     }
 
-    // Fallback (should never hit)
+    // Fallback
     return chestFits[chestFits.length - 1];
   }
 
   function getCombinedMatchPercent(userValues, sizeObj, type) {
+    // Handle null/undefined sizeObj
+    if (!sizeObj) return 0;
+    
     let primary, secondary;
 
     if (type === "top" || type === "jacket") {
@@ -3735,52 +3758,16 @@
     return Math.min(combined, 100);
   }
 
-  // -------------------- Enable / Disable Button --------------------
-  function checkEnableIndividual() {
-    const genderSelected =
-      document.querySelector('input[name="cut"]:checked') !== null;
-    const measurementSelected =
-      document.querySelector('input[name="measurement"]:checked') !== null;
-
-    const chest = chestInput.value.trim() !== "";
-    const waist = waistInput.value.trim() !== "";
-    const height = heightInput.value.trim() !== "";
-
-    const topSelected =
-      document.querySelector(
-        'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
-      ) !== null;
-    const bottomSelected =
-      document.querySelector(
-        'input[name="shorts"]:checked, input[name="pants"]:checked'
-      ) !== null;
-
-    if (
-      genderSelected &&
-      measurementSelected &&
-      chest &&
-      waist &&
-      height &&
-      topSelected &&
-      bottomSelected
-    ) {
-      calculateIndividual.classList.add("btn-secondary");
-      calculateIndividual.classList.remove("btn-disabled");
-    } else {
-      calculateIndividual.classList.remove("btn-secondary");
-      calculateIndividual.classList.add("btn-disabled");
-    }
-  }
-
   // -------------------- Render Recommendations --------------------
   function renderRecommendations() {
-    if (!sizingData) return;
+    if (!sizingData || Object.keys(sizingData).length === 0) {
+      console.error("Sizing data not loaded");
+      return;
+    }
 
     const genderInput =
-      document.querySelector('input[name="cut"]:checked')?.value || "male";
+      document.querySelector('input[name="cut"]:checked')?.value || "men";
     const measurementUnit = "cm";
-      // document.querySelector('input[name="measurement"]:checked')?.value ||
-      // "cm";
 
     const chest = convertToCM(
       parseFloat(document.getElementById("chest").value),
@@ -3790,73 +3777,84 @@
       parseFloat(document.getElementById("waist").value),
       measurementUnit
     );
-        const height = convertToCM(
-          parseFloat(document.getElementById("height").value),
-          measurementUnit
-        );
-        const leg = convertToCM(
-          parseFloat(document.getElementById("leg").value),
-          measurementUnit
-        );
-    
-        const rawTopInputs = [
-          ...document.querySelectorAll(
-            'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
-          ),
-        ];
-        const topInputs = Array.from(new Map(rawTopInputs.map(item => [item.value, item])).values());
+    const height = convertToCM(
+      parseFloat(document.getElementById("height").value),
+      measurementUnit
+    );
+    const leg = convertToCM(
+      parseFloat(document.getElementById("leg").value),
+      measurementUnit
+    );
 
-        const rawBottomInputs = [
-          ...document.querySelectorAll(
-            'input[name="shorts"]:checked, input[name="pants"]:checked'
-          ),
-        ];
-        const bottomInputs = Array.from(new Map(rawBottomInputs.map(item => [item.value, item])).values());
-    
-        containerTop.innerHTML = "";
-        containerBottom.innerHTML = "";
-    
-        // Render Tops / Jackets
-        topInputs.forEach((el) => {
-          const selected = el.value;
-    
-          let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
-    
-          const bestSize = findClosestSize(
-            categoryData,
-            chest,
-            height,
-            "chest",
-            "height"
-          );
-          const matchPercent = getCombinedMatchPercent(
-            { chest, height },
-            bestSize,
-            selected.includes("hoodie") || selected.includes("jacket")
-              ? "jacket"
-              : "top"
-          );
-          const fit = getFit(chest, bestSize.chest[0], bestSize.chest[1]);
-          if (matchPercent === 100) {
-            matchLabel = "Perfect Match";
-            matchClass = "match-green";
-          } else if (matchPercent > 95) {
-            matchLabel = "Within Range";
-            matchClass = "match-blue";
-          } else if (matchPercent > 90) {
-            matchLabel = "Near Range";
-            matchClass = "match-yellow";
-          } else {
-            matchLabel = "Beyond Range";
-            matchClass = "match-red";
-          }
-          const div = document.createElement("div");
-          div.className = "recom";
-          div.innerHTML = `
+    const rawTopInputs = [
+      ...document.querySelectorAll(
+        'input[name="short-sleeved"]:checked, input[name="long-sleeved"]:checked, input[name="hoodies"]:checked'
+      ),
+    ];
+    const topInputs = Array.from(new Map(rawTopInputs.map(item => [item.value, item])).values());
+
+    const rawBottomInputs = [
+      ...document.querySelectorAll(
+        'input[name="shorts"]:checked, input[name="pants"]:checked'
+      ),
+    ];
+    const bottomInputs = Array.from(new Map(rawBottomInputs.map(item => [item.value, item])).values());
+
+    containerTop.innerHTML = "";
+    containerBottom.innerHTML = "";
+
+    // Render Tops / Jackets
+    topInputs.forEach((el) => {
+      const selected = el.value;
+      const productData = sizingData[selected] || {};
+      
+      // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+      const categoryData = genderInput === "youth-unisex" 
+        ? (productData["youth-unisex"] || [])
+        : (productData[genderInput] || []);
+
+      const bestSize = findClosestSize(
+        categoryData,
+        chest,
+        height,
+        "chest",
+        "height"
+      );
+      
+      // Skip if no size found
+      if (!bestSize) {
+        console.warn(`No size found for ${selected} with ${genderInput} cut`);
+        return;
+      }
+      
+      const matchPercent = getCombinedMatchPercent(
+        { chest, height },
+        bestSize,
+        selected.includes("hoodie") || selected.includes("jacket")
+          ? "jacket"
+          : "top"
+      );
+      const fit = getFit(chest, bestSize.chest[0], bestSize.chest[1]);
+      
+      let matchLabel = "";
+      let matchClass = "";
+      
+      if (matchPercent === 100) {
+        matchLabel = "Perfect Match";
+        matchClass = "match-green";
+      } else if (matchPercent > 95) {
+        matchLabel = "Within Range";
+        matchClass = "match-blue";
+      } else if (matchPercent > 90) {
+        matchLabel = "Near Range";
+        matchClass = "match-yellow";
+      } else {
+        matchLabel = "Beyond Range";
+        matchClass = "match-red";
+      }
+      const div = document.createElement("div");
+      div.className = "recom";
+      div.innerHTML = `
         <div class="recom-details">
           <p class="recom-heading">${selected.replace(/-/g, " ")}</p>
           <p class="recom-size">Recommended Size <span>${
@@ -3881,35 +3879,43 @@
             : "top"
         }.webp" class="recom-img" alt="" />
       `;
-          containerTop.appendChild(div);
-        });
-    
-        bottomInputs.forEach((el) => {
-          const selected = el.value;
-          let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
-    
-          // Use 'leg' for pants, 'height' (dummy) for shorts
-          const isPants = selected.includes("pants");
-          const secondaryVal = isPants ? leg : height;
-          const secondaryKey = isPants ? "leg" : "height";
-    
-          const bestSize = findClosestSize(
-            categoryData,
-            waist,
-            secondaryVal,
-            "waist",
-            secondaryKey
-          );
-          const matchPercent = getCombinedMatchPercent(
-            { waist, height: secondaryVal },
-            bestSize,
-            "bottom"
-          );
-          const fit = getFit(waist, bestSize.waist[0], bestSize.waist[1]);
+      containerTop.appendChild(div);
+    });
+
+    bottomInputs.forEach((el) => {
+      const selected = el.value;
+      const productData = sizingData[selected] || {};
+      
+      // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+      const categoryData = genderInput === "youth-unisex" 
+        ? (productData["youth-unisex"] || [])
+        : (productData[genderInput] || []);
+
+      // Use 'leg' for pants, 'height' (dummy) for shorts
+      const isPants = selected.includes("pants");
+      const secondaryVal = isPants ? leg : height;
+      const secondaryKey = isPants ? "leg" : "height";
+
+      const bestSize = findClosestSize(
+        categoryData,
+        waist,
+        secondaryVal,
+        "waist",
+        secondaryKey
+      );
+      
+      // Skip if no size found
+      if (!bestSize) {
+        console.warn(`No size found for ${selected} with ${genderInput} cut`);
+        return;
+      }
+      
+      const matchPercent = getCombinedMatchPercent(
+        { waist, height: secondaryVal },
+        bestSize,
+        "bottom"
+      );
+      const fit = getFit(waist, bestSize.waist[0], bestSize.waist[1]);
 
       let matchLabel = "";
       let matchClass = "";
@@ -4259,11 +4265,11 @@ TO PROCESSING BUTTON CLICK
             ];
             topInputs.forEach((el) => {
               const selected = el.value;
-              let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
+              const productData = sizingData[selected] || {};
+              // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+              const categoryData = genderInput === "youth-unisex" 
+                ? (productData["youth-unisex"] || [])
+                : (productData[genderInput] || []);
 
               const bestSize = findClosestSize(
                 categoryData,
@@ -4272,7 +4278,7 @@ TO PROCESSING BUTTON CLICK
                 "chest",
                 "height"
               );
-              topSizes.push(bestSize.label);
+              if (bestSize) topSizes.push(bestSize.label);
             });
 
             // Collect bottom sizes
@@ -4283,11 +4289,11 @@ TO PROCESSING BUTTON CLICK
             ];
             bottomInputs.forEach((el) => {
               const selected = el.value;
-              let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
+              const productData = sizingData[selected] || {};
+              // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+              const categoryData = genderInput === "youth-unisex" 
+                ? (productData["youth-unisex"] || [])
+                : (productData[genderInput] || []);
               const bestSize = findClosestSize(
                 categoryData,
                 waist,
@@ -4295,7 +4301,7 @@ TO PROCESSING BUTTON CLICK
                 "waist",
                 "height"
               );
-              bottomSizes.push(bestSize.label);
+              if (bestSize) bottomSizes.push(bestSize.label);
             });
           }
 
@@ -4433,11 +4439,11 @@ TO PROCESSING BUTTON CLICK
             // === TOPS ===
             topInputs.forEach((el) => {
               const selected = el.value;
-              let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
+              const productData = sizingData[selected] || {};
+              // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+              const categoryData = genderInput === "youth-unisex" 
+                ? (productData["youth-unisex"] || [])
+                : (productData[genderInput] || []);
 
               const bestSize = findClosestSize(
                 categoryData,
@@ -4446,7 +4452,7 @@ TO PROCESSING BUTTON CLICK
                 "chest",
                 "height"
               );
-              topSizes.push(bestSize.label);
+              if (bestSize) topSizes.push(bestSize.label);
 
               const matchPercent = getCombinedMatchPercent(
                 { chest, height },
@@ -4461,11 +4467,11 @@ TO PROCESSING BUTTON CLICK
             // === BOTTOMS ===
             bottomInputs.forEach((el) => {
               const selected = el.value;
-              let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
+              const productData = sizingData[selected] || {};
+              // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+              const categoryData = genderInput === "youth-unisex" 
+                ? (productData["youth-unisex"] || [])
+                : (productData[genderInput] || []);
               const bestSize = findClosestSize(
                 categoryData,
                 waist,
@@ -4473,7 +4479,7 @@ TO PROCESSING BUTTON CLICK
                 "waist",
                 "height"
               );
-              bottomSizes.push(bestSize.label);
+              if (bestSize) bottomSizes.push(bestSize.label);
 
               const matchPercent = getCombinedMatchPercent(
                 { waist, height },
@@ -4847,11 +4853,11 @@ TO PROCESSING BUTTON CLICK
       const selected = el.value;
 
       // Determine category data
-      let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
+      const productData = sizingData[selected] || {};
+      // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+      const categoryData = genderInput === "youth-unisex" 
+        ? (productData["youth-unisex"] || [])
+        : (productData[genderInput] || []);
 
       const bestSize = findClosestSize(
         categoryData,
@@ -4860,6 +4866,8 @@ TO PROCESSING BUTTON CLICK
         "chest",
         "height"
       );
+      if (!bestSize) return; // Skip if no size found
+      
       const matchPercent = getCombinedMatchPercent(
         { chest, height },
         bestSize,
@@ -4912,11 +4920,11 @@ TO PROCESSING BUTTON CLICK
     bottomInputs.forEach((el) => {
       const selected = el.value;
 
-      let productData = sizingData[selected] || {};
-      let categoryData = [
-        ...(productData["youth-unisex"] || []),
-        ...(productData[genderInput] || [])
-      ];
+      const productData = sizingData[selected] || {};
+      // If youth-unisex is selected, only use youth-unisex data; otherwise use adult data
+      const categoryData = genderInput === "youth-unisex" 
+        ? (productData["youth-unisex"] || [])
+        : (productData[genderInput] || []);
       const bestSize = findClosestSize(
         categoryData,
         waist,
@@ -4924,6 +4932,8 @@ TO PROCESSING BUTTON CLICK
         "waist",
         "height"
       );
+      if (!bestSize) return; // Skip if no size found
+      
       const matchPercent = getCombinedMatchPercent(
         { waist, height },
         bestSize,
@@ -5025,6 +5035,7 @@ TO PROCESSING BUTTON CLICK
   document.addEventListener(
     "mouseenter",
     (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
       const tool = e.target.closest(".tooltip-icon-individual");
       if (!tool) return;
 
@@ -5036,6 +5047,7 @@ TO PROCESSING BUTTON CLICK
   document.addEventListener(
     "mouseleave",
     (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
       const tool = e.target.closest(".tooltip-icon-individual");
       if (!tool) return;
 
@@ -5045,6 +5057,7 @@ TO PROCESSING BUTTON CLICK
   );
 
   document.addEventListener("mousemove", (e) => {
+    if (!e.target || typeof e.target.closest !== 'function') return;
     const tool = e.target.closest(".tooltip-icon-individual");
     if (!tool) return;
 
